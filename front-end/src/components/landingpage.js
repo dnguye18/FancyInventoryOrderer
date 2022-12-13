@@ -22,7 +22,7 @@ const LandingPage = () => {
                     </button>
 
                     <p>Dont have an account?</p>
-                    <a href ="https://google.com" target="_blank" rel="noreferrer">
+                    <a href ="/create_profile">
                         <button className="create">Create Account</button>
                     </a>
                 </div>
