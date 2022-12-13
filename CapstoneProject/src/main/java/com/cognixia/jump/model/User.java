@@ -30,7 +30,7 @@ public class User implements Serializable {
 	
 	@NotBlank
 	@Column( nullable = false )
-	private String email;
+	private String username;
 	
 	@NotBlank
 	@Column( nullable = false )
@@ -65,7 +65,7 @@ public class User implements Serializable {
 			@NotBlank String last_name, String phone, boolean enabled) {
 		super();
 		this.id = id;
-		this.email = email;
+		this.username = email;
 		this.password = password;
 		this.role = role;
 		this.first_name = first_name;
@@ -82,12 +82,12 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -148,7 +148,7 @@ public class User implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, enabled, first_name, id, last_name, password, phone, role);
+		return Objects.hash(username, enabled, first_name, id, last_name, password, phone, role);
 	}
 
 	@Override
@@ -160,7 +160,7 @@ public class User implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(email, other.email) && enabled == other.enabled
+		return Objects.equals(username, other.username) && enabled == other.enabled
 				&& Objects.equals(first_name, other.first_name) && Objects.equals(id, other.id)
 				&& Objects.equals(last_name, other.last_name) && Objects.equals(password, other.password)
 				&& Objects.equals(phone, other.phone) && role == other.role;
@@ -168,7 +168,7 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + ", role=" + role + ", first_name="
+		return "User [id=" + id + ", email=" + username + ", password=" + password + ", role=" + role + ", first_name="
 				+ first_name + ", last_name=" + last_name + ", phone=" + phone + ", enabled=" + enabled + "]";
 	}
 }
