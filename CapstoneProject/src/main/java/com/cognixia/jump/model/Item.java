@@ -20,6 +20,10 @@ public class Item implements Serializable {
 	private Integer id;
 	
 	@NotBlank
+	@Column( nullable = false )
+	private Integer order_id;
+	
+	@NotBlank
 	@Column( unique = true, nullable = false )
 	private String name;
 	
@@ -39,6 +43,14 @@ public class Item implements Serializable {
 		this.id = id;
 	}
 
+	public Integer getOrderId() {
+		return order_id;
+	}
+	
+	public void setOrderId(Integer order_id) {
+		this.order_id = order_id;
+	}
+	
 	public String getName() {
 		return name;
 	}
