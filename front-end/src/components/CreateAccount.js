@@ -33,22 +33,20 @@ const CreateAccount = () => {
                 <form onSubmit={ handleSubmit } >
                     <div className='mb-3' style={{textAlign: "center"}}>
                         <input placeholder="Email" type="text" name="email" value={email} onChange={ (event) => { setEmail(event.target.value) } }/>  
-                    </div>
-                    <div className='mb-3' style={{textAlign: "center"}}>
+                        <br/>
                         <input placeholder="First Name" type="text" name="first_name" value={first_name} onChange={ (event) => { setFirst_name(event.target.value) } } />
-                    </div>
-                    <div className='mb-3' style={{textAlign: "center"}}>
+                        <br/>
                         <input placeholder="Last Name" type="text" name="last_name" value={last_name} onChange={ (event) => { setLast_name(event.target.value) } } />
-                    </div>
-                    <div className='mb-3' style={{textAlign: "center"}}>
+                        <br/>
                         <input placeholder="Mobile Phone Number (Optional)" type="text" phone_number="phone_number" value={phone_number} onChange={ (event) => { setPhone_number(event.target.value) } } />
-                    </div>
-                    <div className='mb-3' style={{textAlign: "center"}}>
+                        <br/>
                         <input placeholder="Create Password" type="text" password="password" value={password} onChange={ (event) => { setPassword(event.target.value) } }/>
+                        <br/>
+                        <button style={{ border:"4px solid black", textAlign: "center", width:"100%"  }} type="submit" className="btn btn-primary" value="Submit">
+                            Create Account
+                        </button> 
                     </div>
-                    <button style={{ border:"4px solid black", textAlign: "center", width:"100%"  }} type="submit" className="btn btn-primary" value="Submit">
-                        Create Account
-                    </button> 
+                       
                 </form>  
             </div>
         );

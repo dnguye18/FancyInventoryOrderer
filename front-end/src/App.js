@@ -8,7 +8,7 @@ function App() {
     <div className="container">
       
       <Routes>
-        <LandingPage />
+        <Route path="/login" element={<LandingPage />}/>
         <Route path="/create_profile" element={<CreateAccount />} />
       </Routes>
     </div>
