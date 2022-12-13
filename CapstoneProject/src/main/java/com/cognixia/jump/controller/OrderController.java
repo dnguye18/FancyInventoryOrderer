@@ -52,7 +52,7 @@ public class OrderController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(created);
 	}
 	
-	@PutMapping("/order/update/{id}")
+	@PutMapping("/order")
 	public ResponseEntity<?> updateCustomer(@Valid @RequestBody Orders order) throws ResourceNotFoundException {
 		if( repo.existsById( order.getId() ) ) {
 			for(Item i : order.getItems()) {
