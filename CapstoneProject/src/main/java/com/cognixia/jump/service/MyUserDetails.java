@@ -23,7 +23,7 @@ private List<GrantedAuthority> authorities;
 
 public MyUserDetails( User user ) {
 
-this.username = user.getEmail();
+this.username = user.getUsername();
 this.password = user.getPassword();
 this.enabled = user.isEnabled();
 

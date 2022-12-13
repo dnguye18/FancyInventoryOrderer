@@ -1,16 +1,21 @@
 package com.cognixia.jump.config;
 
-import java.beans.BeanProperty;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.cognixia.jump.filter.JwtRequestFilter;
 
 @Configuration
 public class SecurityConfiguration {
@@ -38,8 +43,7 @@ public class SecurityConfiguration {
 				.antMatchers(HttpMethod.POST, "/api/user").permitAll() // let anyone create a user
 				.anyRequest().authenticated() // allow anyone in if they are a user
 				.and()
-				.sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS ); // tell security NOT TO CREATE any sessions
-			
+				.sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS ); // tell security NOT TO CREATE any sessions			
 		
 			// typically the first filter that is checked is the UsernamePasswordAuthenticationFilter, however if this filter is checked
 			// first, there is no username or password to check, so security will block request
@@ -51,4 +55,35 @@ public class SecurityConfiguration {
 			
 			return http.build();
 		}
+		
+		// encode/decode all the user passwords
+		@Bean
+		protected PasswordEncoder encoder() {
+			
+			// won't do any password encryption
+			//return NoOpPasswordEncoder.getInstance();
+			
+			// has an encrypted password
+			return new BCryptPasswordEncoder();
+		}
+		
+		// load the encoder & user details service that are needed for spring security to do authentication
+		@Bean
+		protected DaoAuthenticationProvider authenticationProvider() {
+
+			DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+
+			authProvider.setUserDetailsService(userDetailsService);
+			authProvider.setPasswordEncoder(encoder());
+
+			return authProvider;
+		}
+		
+		// can autowire and access the authentication manager (manages authentication (login) of our project)
+		@Bean
+		protected AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+			return authConfig.getAuthenticationManager();
+		}
+
+		
 }
