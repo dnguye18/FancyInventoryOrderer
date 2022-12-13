@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -77,5 +78,18 @@ public class UserController {
 		}
 		
 		throw new ResourceNotFoundException("User", user.getId());
+	}
+	
+	@DeleteMapping("/user/delete/{id}")
+	public ResponseEntity<?> deleteUser(@PathVariable int id) throws ResourceNotFoundException {
+		if( repo.existsById(id) ) {
+			User toBeDeleted = (User)getUserById(id).getBody();
+			
+			repo.deleteById(id);
+			
+			return ResponseEntity.status(HttpStatus.OK).body( toBeDeleted );
+		}
+		
+		throw new ResourceNotFoundException("User", id);
 	}
 }
