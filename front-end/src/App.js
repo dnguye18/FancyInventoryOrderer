@@ -5,10 +5,14 @@ import LandingPage from './components/landingpage';
 
 function App() {
   return (
-    <div className="container">
+    <div className="Appcontainer">
       
       <Routes>
+<<<<<<< HEAD
         <Route path="/login" element={<LandingPage />}/>
+=======
+        <Route path='/login' element={<LandingPage />} />
+>>>>>>> front-end
         <Route path="/create_profile" element={<CreateAccount />} />
       </Routes>
     </div>
