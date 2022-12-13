@@ -53,19 +53,17 @@ public class OrderController {
 	}
 	
 	@PutMapping("/order/update/{id}")
-	public ResponseEntity<?> updateCustomer(@PathVariable int id, @Valid @RequestBody Item item) throws ResourceNotFoundException {
-		Optional<Orders> order = repo.findById(id);
-		if( order.isPresent() ) {
+	public ResponseEntity<?> updateCustomer(@Valid @RequestBody Orders order) throws ResourceNotFoundException {
+		if( repo.existsById( order.getId() ) ) {
+			for(Item i : order.getItems()) {
+				i.setOrder(order);
+			}
 			
-			Orders updated = order.get();
-			updated.getItems().add(item);
-			item.setOrder(updated);
+			Orders updated = repo.save( order );
 			
-			Orders finished = repo.save( updated );
-			
-			return ResponseEntity.status(HttpStatus.OK).body( finished );
+			return ResponseEntity.status(HttpStatus.OK).body( updated );
 		}
 		
-		throw new ResourceNotFoundException("Order", id);
+		throw new ResourceNotFoundException("Order", order.getId());
 	}	
 }
