@@ -1,8 +1,10 @@
 package com.cognixia.jump.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.cognixia.jump.model.Orders;
 
-public interface OrderRepository extends JpaRepository<Orders, Integer> {
+@Repository
+public interface OrdersRepository extends JpaRepository<Orders, Integer> {
 }
