@@ -19,20 +19,21 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cognixia.jump.exception.ResourceNotFoundException;
 import com.cognixia.jump.model.Item;
 import com.cognixia.jump.model.Orders;
-import com.cognixia.jump.repository.OrderRepository;
+import com.cognixia.jump.repository.OrdersRepository;
 
 @RestController
 @RequestMapping("/api")
 public class OrderController {
-	@Autowired
-	OrderRepository repo;
 	
-	@GetMapping("/order")
+	@Autowired
+	OrdersRepository repo;
+	
+	@GetMapping("/orders")
 	public List<Orders> getAllOrders() {
 		return repo.findAll();
 	}
 	
-	@GetMapping("/order/{id}")
+	@GetMapping("/orders/{id}")
 	public ResponseEntity<?> getOrderById(@PathVariable int id) throws ResourceNotFoundException {
 		Optional<Orders> found = repo.findById(id);
 		
@@ -43,7 +44,7 @@ public class OrderController {
 		return ResponseEntity.status(HttpStatus.OK).body(found);
 	}
 	
-	@PostMapping("/order")
+	@PostMapping("/orders")
 	public ResponseEntity<?> createOrder(@Valid @RequestBody Orders order) {
 		order.setId(null);
 		
@@ -52,7 +53,7 @@ public class OrderController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(created);
 	}
 	
-	@PutMapping("/order")
+	@PutMapping("/orders")
 	public ResponseEntity<?> updateCustomer(@Valid @RequestBody Orders order) throws ResourceNotFoundException {
 		if( repo.existsById( order.getId() ) ) {
 			for(Item i : order.getItems()) {
