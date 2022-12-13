@@ -33,9 +33,21 @@ public class Item implements Serializable {
 	@Column( nullable = false )
 	private String price;
 	
-	@NotBlank
 	@Column( nullable = false )
 	private Integer qty;
+	
+	public Item() {
+		
+	}
+
+	public Item(Integer id, Orders order, @NotBlank String name, @NotBlank String price, @NotBlank Integer qty) {
+		super();
+		this.id = id;
+		this.order = order;
+		this.name = name;
+		this.price = price;
+		this.qty = qty;
+	}
 
 	public Integer getId() {
 		return id;

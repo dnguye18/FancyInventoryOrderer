@@ -66,7 +66,7 @@ public class UserController {
 	}
 	
 	@PutMapping("/user")
-	public ResponseEntity<?> updateUser(@Valid @RequestBody User user) throws ResourceNotFoundException {
+	public ResponseEntity<?> updateUser(@RequestBody User user) throws ResourceNotFoundException {
 		if( repo.existsById( user.getId() ) ) {
 			for( Orders order : user.getOrders() ) {
 				order.setUsr(user);
@@ -80,7 +80,7 @@ public class UserController {
 		throw new ResourceNotFoundException("User", user.getId());
 	}
 	
-	@DeleteMapping("/user/delete/{id}")
+	@DeleteMapping("/user/{id}")
 	public ResponseEntity<?> deleteUser(@PathVariable int id) throws ResourceNotFoundException {
 		if( repo.existsById(id) ) {
 			User toBeDeleted = (User)getUserById(id).getBody();
