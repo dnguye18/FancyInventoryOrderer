@@ -36,7 +36,26 @@ input{
 
 p{
     padding-top: 15px;
+    font-size: 16px;
 }
+
+.signIn, .create{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: solid 1px;
+    background-color: #ae87f8;
+    font-size: 17px;
+    transition-duration: .2s;
+    width: 170px;
+    height: 40px;
+}
+
+.signIn:hover, .create:hover{
+    background-color: #e7e2fa;
+    box-shadow: 0 5px 6px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)
+}
+
 
 img{
     border-radius: 50%;

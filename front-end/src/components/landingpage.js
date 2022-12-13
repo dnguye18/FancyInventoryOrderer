@@ -6,7 +6,7 @@ const LandingPage = () => {
     return(
         <body>
             <div className="container">
-                <p className="welcome">Welcome</p>
+                <p className="welcome">Welcome To Fancy Inventory Orderer</p>
                 <img src="https://www.hanaretail.com/wp-content/uploads/2022/03/2-2.png" alt="loginPic"/>
                 <div className="loginContainer">
                     <br></br>
@@ -17,13 +17,14 @@ const LandingPage = () => {
 
                     <p></p>
 
-                    <button className="signUp">
+                    <button className="signIn">
                         Sign in
                     </button>
 
                     <p>Dont have an account?</p>
-
-                    <button className="create">Create Account</button>
+                    <a href ="https://google.com" target="_blank" rel="noreferrer">
+                        <button className="create">Create Account</button>
+                    </a>
                 </div>
             </div>
         </body>
