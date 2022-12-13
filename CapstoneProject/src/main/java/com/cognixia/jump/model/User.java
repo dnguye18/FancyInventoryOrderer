@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class User implements Serializable {
 
@@ -54,6 +56,7 @@ public class User implements Serializable {
 	@Column( columnDefinition = "boolean default true" )
 	private boolean enabled;
 	
+	@JsonManagedReference
 	@OneToMany( mappedBy = "usr", cascade = CascadeType.ALL )
 	private List<Orders> orders;
 	
