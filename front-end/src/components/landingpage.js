@@ -6,7 +6,7 @@ const LandingPage = () => {
     return(
         <body>
             <div className="container">
-                <p className="welcome">Welcome To Fancy Inventory Orderer</p>
+                <p className="welcome">Fancy Inventory Orderer</p>
                 <img src="https://www.hanaretail.com/wp-content/uploads/2022/03/2-2.png" alt="loginPic"/>
                 <div className="loginContainer">
                     <br></br>
