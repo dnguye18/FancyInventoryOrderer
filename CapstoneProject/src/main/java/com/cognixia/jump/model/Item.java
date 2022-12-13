@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Item implements Serializable {
 
@@ -21,6 +23,7 @@ public class Item implements Serializable {
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	private Integer id;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn( name="order_id", referencedColumnName="id" )
 	private Orders order;

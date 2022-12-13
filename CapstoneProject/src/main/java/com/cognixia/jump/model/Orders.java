@@ -14,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Orders implements Serializable {
 
@@ -30,10 +33,12 @@ public class Orders implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Progress progress;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn( name = "user_id", referencedColumnName = "id" )
 	private User usr;
 	
+	@JsonManagedReference
 	@OneToMany( mappedBy = "order", cascade = CascadeType.ALL)
 	private List<Item> items;
 
