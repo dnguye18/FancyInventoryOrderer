@@ -58,6 +58,7 @@ public class ItemController {
 	public ResponseEntity<?> updateItem(@Valid @RequestBody Item item) throws ResourceNotFoundException {
 		if( repo.existsById( item.getId() ) ) {
 			
+			
 			return ResponseEntity.status(HttpStatus.OK).body( item );
 		}
 		
@@ -65,4 +66,9 @@ public class ItemController {
 	}
 	
 	// TODO
+	
+	//@GetMapping("/item/order/{id}")
+	//public List<Item> sameOrder(@PathVariable Orders order) {
+	//	return repo.sameOrder(order);
+	//}
 }
