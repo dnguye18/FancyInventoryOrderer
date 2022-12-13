@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,57 +19,42 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cognixia.jump.exception.ResourceNotFoundException;
 import com.cognixia.jump.model.Item;
-import com.cognixia.jump.model.Orders;
 import com.cognixia.jump.repository.ItemRepository;
+import com.cognixia.jump.service.ItemService;
 
 @RestController
 @RequestMapping("/api")
 public class ItemController {
 	
 	@Autowired
-	ItemRepository repo;
+	ItemService service;
 	
 	@GetMapping("/item")
 	public List<Item> getAllItems() {
-		return repo.findAll();
+		return service.getAllItems();
 	}
 	
 	@GetMapping("/item/{id}")
 	public ResponseEntity<?> getItemById(@PathVariable int id) throws ResourceNotFoundException {
-		Optional<Item> found = repo.findById(id);
-		
-		if( !found.isPresent() ) {
-			throw new ResourceNotFoundException("Item", id);
-		}
-		
-		return ResponseEntity.status(HttpStatus.OK).body(found.get());
+		Item found = service.getItemById(id);
+		return ResponseEntity.status(HttpStatus.OK).body( found );
 	}
 	
 	@PostMapping("/item")
 	public ResponseEntity<?> createItem(@Valid @RequestBody Item item) {
-		item.setId(null);
-		
-		Item created = repo.save( item );
-		
-		return ResponseEntity.status(HttpStatus.CREATED).body(created);
+		Item created = service.addItem(item);
+		return ResponseEntity.status(HttpStatus.CREATED).body( created );
 	}
 	
-	// TODO PUT MAPPING UPDATE ITEM
 	@PutMapping("/item")
 	public ResponseEntity<?> updateItem(@Valid @RequestBody Item item) throws ResourceNotFoundException {
-		if( repo.existsById( item.getId() ) ) {
-			
-			
-			return ResponseEntity.status(HttpStatus.OK).body( item );
-		}
-		
-		throw new ResourceNotFoundException("Item", item.getId());
+		Item updated = service.updateItem(item);
+		return ResponseEntity.status(HttpStatus.OK).body( updated );
 	}
 	
-	// TODO
-	
-	//@GetMapping("/item/order/{id}")
-	//public List<Item> sameOrder(@PathVariable Orders order) {
-	//	return repo.sameOrder(order);
-	//}
+	@DeleteMapping("/item/{id}")
+	public ResponseEntity<?> deleteItem(@PathVariable int id) throws ResourceNotFoundException {
+		Item deleted = service.deleteItem(id);
+		return ResponseEntity.status(HttpStatus.OK).body( deleted );
+	}
 }

@@ -64,11 +64,11 @@ public class User implements Serializable {
 		
 	}
 
-	public User(Integer id, @NotBlank String email, @NotBlank String password, Role role, @NotBlank String first_name,
+	public User(Integer id, @NotBlank String username, @NotBlank String password, Role role, @NotBlank String first_name,
 			@NotBlank String last_name, String phone, boolean enabled) {
 		super();
 		this.id = id;
-		this.username = email;
+		this.username = username;
 		this.password = password;
 		this.role = role;
 		this.first_name = first_name;
