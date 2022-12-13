@@ -10,8 +10,8 @@ import org.springframework.web.context.request.WebRequest;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	
-	@ExceptionHandler(UserNotFoundException.class)
-	public ResponseEntity<?> userNotFound( UserNotFoundException e, WebRequest request ) {
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<?> userNotFound( ResourceNotFoundException e, WebRequest request ) {
 		ErrorDetails errorDetails = new ErrorDetails(new Date(), e.getMessage(), request.getDescription(false) );
 		
 		return ResponseEntity.status(404).body(errorDetails);

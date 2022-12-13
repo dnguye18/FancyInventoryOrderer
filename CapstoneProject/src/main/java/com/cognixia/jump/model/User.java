@@ -1,7 +1,10 @@
 package com.cognixia.jump.model;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -37,11 +41,11 @@ public class User implements Serializable {
 	private Role role;
 	
 	@NotBlank
-	@Column( unique = false, nullable = false )
+	@Column( nullable = false )
 	private String first_name;
 	
 	@NotBlank
-	@Column( unique = false, nullable = false )
+	@Column( nullable = false )
 	private String last_name;
 	
 	@Column( unique = true, nullable = true )
@@ -49,6 +53,9 @@ public class User implements Serializable {
 	
 	@Column( columnDefinition = "boolean default true" )
 	private boolean enabled;
+	
+	@OneToMany( mappedBy = "usr", cascade = CascadeType.ALL )
+	private List<Orders> orders;
 	
 	public User() {
 		
@@ -129,6 +136,34 @@ public class User implements Serializable {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+	
+	public List<Orders> getOrders() {
+		return orders;
+	}
+	
+	public void setOrders(List<Orders> orders) {
+		this.orders = orders;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(email, enabled, first_name, id, last_name, password, phone, role);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return Objects.equals(email, other.email) && enabled == other.enabled
+				&& Objects.equals(first_name, other.first_name) && Objects.equals(id, other.id)
+				&& Objects.equals(last_name, other.last_name) && Objects.equals(password, other.password)
+				&& Objects.equals(phone, other.phone) && role == other.role;
 	}
 
 	@Override
