@@ -17,13 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cognixia.jump.exception.ResourceNotFoundException;
-import com.cognixia.jump.model.Order;
+import com.cognixia.jump.model.Orders;
 import com.cognixia.jump.model.User;
 import com.cognixia.jump.repository.UserRepository;
 
 @RestController
 @RequestMapping("/api")
 public class UserController {
+	
 	@Autowired
 	UserRepository repo;
 	
@@ -52,6 +53,11 @@ public class UserController {
 		
 		// TODO --> IMPLEMENT PASSWORD ENCODER
 		//user.setPassword( encoder.encode( user.getPassword() ) );
+		
+		for(Orders o : user.getOrders() ) {
+			o.setId(null);
+			o.setUsr(user);
+		}
 	
 		User created = repo.save( user );
 		
@@ -61,8 +67,8 @@ public class UserController {
 	@PutMapping("/user")
 	public ResponseEntity<?> updateUser(@Valid @RequestBody User user) throws ResourceNotFoundException {
 		if( repo.existsById( user.getId() ) ) {
-			for( Order order : user.getOrders() ) {
-				order.setUser(user);
+			for( Orders order : user.getOrders() ) {
+				order.setUsr(user);
 			}
 			
 			User updated = repo.save( user );

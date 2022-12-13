@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cognixia.jump.exception.ResourceNotFoundException;
-import com.cognixia.jump.model.Order;
+import com.cognixia.jump.model.Item;
+import com.cognixia.jump.model.Orders;
 import com.cognixia.jump.repository.OrderRepository;
 
 @RestController
@@ -27,13 +28,13 @@ public class OrderController {
 	OrderRepository repo;
 	
 	@GetMapping("/order")
-	public List<Order> getAllOrders() {
+	public List<Orders> getAllOrders() {
 		return repo.findAll();
 	}
 	
 	@GetMapping("/order/{id}")
 	public ResponseEntity<?> getOrderById(@PathVariable int id) throws ResourceNotFoundException {
-		Optional<Order> found = repo.findById(id);
+		Optional<Orders> found = repo.findById(id);
 		
 		if( !found.isPresent() ) {
 			throw new ResourceNotFoundException("Order", id);
@@ -43,18 +44,26 @@ public class OrderController {
 	}
 	
 	@PostMapping("/order")
-	public ResponseEntity<?> createOrder(@Valid @RequestBody Order order) {
+	public ResponseEntity<?> createOrder(@Valid @RequestBody Orders order) {
 		order.setId(null);
 		
-		Order created = repo.save(order);
+		Orders created = repo.save(order);
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(created);
 	}
 	
-	// TODO add PutMapping("/order") to implement updateOrder
-	
-	
-	
-	// TODO
-	
+	@PutMapping("/order")
+	public ResponseEntity<?> updateCustomer(@Valid @RequestBody Orders order) throws ResourceNotFoundException {
+		if( repo.existsById( order.getId() ) ) {
+			for(Item i : order.getItems()) {
+				i.setOrder(order);
+			}
+			
+			Orders updated = repo.save( order );
+			
+			return ResponseEntity.status(HttpStatus.OK).body( updated );
+		}
+		
+		throw new ResourceNotFoundException("Order", order.getId());
+	}	
 }

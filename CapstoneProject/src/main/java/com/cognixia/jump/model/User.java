@@ -41,11 +41,11 @@ public class User implements Serializable {
 	private Role role;
 	
 	@NotBlank
-	@Column( unique = false, nullable = false )
+	@Column( nullable = false )
 	private String first_name;
 	
 	@NotBlank
-	@Column( unique = false, nullable = false )
+	@Column( nullable = false )
 	private String last_name;
 	
 	@Column( unique = true, nullable = true )
@@ -54,8 +54,8 @@ public class User implements Serializable {
 	@Column( columnDefinition = "boolean default true" )
 	private boolean enabled;
 	
-	@OneToMany( mappedBy = "user", cascade = CascadeType.ALL )
-	private List<Order> orders;
+	@OneToMany( mappedBy = "usr", cascade = CascadeType.ALL )
+	private List<Orders> orders;
 	
 	public User() {
 		
@@ -138,11 +138,11 @@ public class User implements Serializable {
 		this.enabled = enabled;
 	}
 	
-	public List<Order> getOrders() {
+	public List<Orders> getOrders() {
 		return orders;
 	}
 	
-	public void setOrders(List<Order> orders) {
+	public void setOrders(List<Orders> orders) {
 		this.orders = orders;
 	}
 
