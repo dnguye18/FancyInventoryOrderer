@@ -50,4 +50,8 @@ public class ItemService {
 		repo.deleteById(id);
 		return toDelete;
 	}
+	
+	public List<Item> getItemsWithMaxQuantity(int qty) {
+		return repo.itemsWithMaxQty(qty);
+	}
 }

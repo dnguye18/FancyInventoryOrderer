@@ -11,7 +11,6 @@ import com.cognixia.jump.model.Orders;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item	,Integer> {
-
-	//@Query("SELECT i FROM Item i WHERE i.order_id = ?1")
-	//public List<Item> sameOrder(Orders order);
+	@Query("select i from Item i where i.qty < ?1")
+	public List<Item> itemsWithMaxQty(int qty);
 }
