@@ -55,4 +55,9 @@ public class ItemController {
 		Item deleted = service.deleteItem(id);
 		return ResponseEntity.status(HttpStatus.OK).body( deleted );
 	}
+	
+	@GetMapping("/item/qty/{qty}")
+	public List<Item> getItemsWithMaxQty(@PathVariable int qty) {
+		return service.getItemsWithMaxQuantity(qty);
+	}
 }
