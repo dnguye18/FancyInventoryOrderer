@@ -15,12 +15,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -32,7 +30,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.cognixia.jump.exception.ResourceNotFoundException;
 import com.cognixia.jump.model.User;
 import com.cognixia.jump.model.User.Role;
-import com.cognixia.jump.repository.UserRepository;
 import com.cognixia.jump.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -134,7 +131,6 @@ public class UserControllerTest {
 	@Test
 	void testCreateUser() throws Exception {
 		String uri = STARTING_URI + "/user";
-		int id = 1;
 		User user = new User(1, "test1", "pw123", Role.ROLE_USER, "Testy", "McTester", "123-456-7890", true);
 		
 		when( service.addUser( Mockito.any(User.class) ) )

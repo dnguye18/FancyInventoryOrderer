@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.cognixia.jump.exception.ResourceNotFoundException;
 import com.cognixia.jump.model.Orders;
 import com.cognixia.jump.model.User;
+import com.cognixia.jump.model.User.Role;
 import com.cognixia.jump.repository.UserRepository;
 
 @Service
@@ -27,9 +28,9 @@ public class UserService {
 	public User getUserById(int id) throws ResourceNotFoundException {
 		Optional<User> found = repo.findById(id);
 		
-		if( !found.isPresent() ) {
+		if( !found.isPresent() ) 
 			throw new ResourceNotFoundException("User", id);
-		}
+		
 		
 		return found.get();
 	}
@@ -48,13 +49,13 @@ public class UserService {
 	}
 	
 	public User updateUser(User user) throws ResourceNotFoundException {
-		if( !repo.existsById(user.getId()) ) {
+		if( !repo.existsById(user.getId()) ) 
 			throw new ResourceNotFoundException("User", user.getId());
-		}
 		
-		for( Orders order : user.getOrders() ) {
+		
+		for( Orders order : user.getOrders() ) 
 			order.setUsr(user);
-		}
+		
 		
 		User updated = repo.save(user);
 		
@@ -65,5 +66,32 @@ public class UserService {
 		User toDelete = getUserById(id);
 		repo.deleteById(id);
 		return toDelete;
+	}
+	
+	public User getUserByUsername(String username) throws ResourceNotFoundException {
+		Optional<User> user = repo.findByUsername(username);
+		if( !user.isPresent() ) 
+			throw new ResourceNotFoundException("User", -1);
+		
+		
+		return user.get();
+	}
+	
+	public User getUserByPhone(String phone) throws ResourceNotFoundException {
+		Optional<User> user = repo.findByPhone(phone);
+		if( !user.isPresent() ) 
+			throw new ResourceNotFoundException("User", -1);
+		
+		
+		return user.get();
+	}
+	
+	public List<User> getUsersByRole(Role role) throws ResourceNotFoundException {
+		List<User> users = repo.findByRole(role);
+		
+		if( users.isEmpty() ) 
+			throw new ResourceNotFoundException("User", -1);
+		
+		return users;
 	}
 }

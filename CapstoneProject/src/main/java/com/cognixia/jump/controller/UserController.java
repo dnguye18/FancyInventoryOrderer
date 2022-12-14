@@ -61,4 +61,16 @@ public class UserController {
 		User deleted = service.deleteUser(id);
 		return ResponseEntity.status(HttpStatus.OK).body( deleted );
 	}
+	
+	@GetMapping("/user/phone/{phone}")
+	public ResponseEntity<?> getUserByPhone(@PathVariable String phone) throws ResourceNotFoundException {
+		User found = service.getUserByPhone(phone);
+		return ResponseEntity.status(HttpStatus.OK).body( found );
+	}
+	
+	@GetMapping("/user/username/{username}")
+	public ResponseEntity<?> getUserByUsername(@PathVariable String username) throws ResourceNotFoundException {
+		User found = service.getUserByUsername(username);
+		return ResponseEntity.status(HttpStatus.OK).body( found );
+	}
 }
