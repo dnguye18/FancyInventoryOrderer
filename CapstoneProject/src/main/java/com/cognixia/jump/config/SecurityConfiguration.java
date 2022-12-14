@@ -38,12 +38,32 @@ public class SecurityConfiguration {
 		protected SecurityFilterChain filterChain( HttpSecurity http ) throws Exception {
 			
 			http.csrf().disable()
-				.authorizeRequests()
-				.antMatchers("/authenticate").permitAll() // allow anyone to make a request to create a JWT
-				.antMatchers(HttpMethod.POST, "/api/user").permitAll() // let anyone create a user
-				.anyRequest().authenticated() // allow anyone in if they are a user
-				.and()
-				.sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS ); // tell security NOT TO CREATE any sessions			
+			.authorizeRequests()
+			.antMatchers("/authenticate").permitAll() // allow anyone to make a request to create a JWT
+			.antMatchers(HttpMethod.POST, "/api/user").permitAll() // let anyone create a user
+			.antMatchers("/api/user/**").permitAll()
+			.antMatchers(HttpMethod.POST, "/api/orders").permitAll()
+			.antMatchers("/api/orders/**").permitAll()
+			.antMatchers("/api/item/**").permitAll()
+			.antMatchers("/openapi.html").permitAll()
+			.antMatchers("/swagger-ui.html").permitAll()
+			.antMatchers("/swagger-ui/").permitAll()
+			.antMatchers("/swagger-ui").permitAll()
+			.antMatchers("/v3/api-docs").permitAll()
+			.antMatchers("/v3/api-docs.yaml").permitAll()
+			.antMatchers("/swagger-ui-custom.html").permitAll()
+			.antMatchers("/swagger-ui/index.html").permitAll()
+			.antMatchers("/v2/api-docs",
+	                "/configuration/ui",
+	                "/swagger-resources/**",
+	                "/configuration/security",
+	                "/swagger-ui.html",
+	                "/webjars/**","/v3/api-docs/**",
+	                "/swagger-ui/**",
+	                "/swagger-ui.html").permitAll()
+			.anyRequest().authenticated() // allow anyone in if they are a user
+			.and()
+			.sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS ); // tell security NOT TO CREATE any sessions			
 		
 			// typically the first filter that is checked is the UsernamePasswordAuthenticationFilter, however if this filter is checked
 			// first, there is no username or password to check, so security will block request
