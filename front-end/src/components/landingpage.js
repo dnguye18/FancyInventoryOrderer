@@ -2,6 +2,7 @@ import React from "react";
 import '../css/landingpage.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 
+
 const LandingPage = () => {
     return(
         <body>
@@ -17,9 +18,11 @@ const LandingPage = () => {
 
                     <p></p>
 
-                    <button className="signIn">
-                        Sign in
-                    </button>
+                    <a href ="/signedIn">
+                        <button className="signIn">
+                            Sign in
+                        </button>
+                    </a>
 
                     <p>Dont have an account?</p>
                     <a href ="/create_profile">

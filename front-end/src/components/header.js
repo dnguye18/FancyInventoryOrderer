@@ -1,40 +1,41 @@
 import React from 'react';
+import '../css/header.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
-        <header>
-            <h1 className="display-2">Welcome To Fancy Inventory Orderer</h1>
+        <div>
+            <h1 className="display-2">Welcome </h1>
+            <Link className="navbar-brand" to="/login" id='signOut' >Sign out</Link>
 
-            <nav className='navbar navbar-expand-lg bg-light'>
-                <div className='container-fluid'>
-                    
-                    <Link className='navbar-brand' to='/'>Home</Link>
+            <nav className="navbar navbar-expand-lg bg-light">
+                <div className="container-fluid">
 
-                    <button className='navbar-toggler' 
-                            type='button' 
-                            data-bs-toggle='collapse' data-bs-target='#navbarNavAltMarkup' aria-controls='navbarNavAltMarkup' aria-expanded='false' 
-                            aria-label='Toggle navigation' >
-                        <span className='navbar-toggler-icon'></span>
+                    <Link className="navbar-brand" to="/login" >Home</Link>
+
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
                     </button>
-                    
-                    <div className='collapse navbar-collapse'
-                         id='navbarNavAltMarkup'>
-                        <div className='navbar-nav'>
 
-                            <Link className='nav-link' to='/view'>View</Link>
+                    <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div className="navbar-nav">
 
-                            <Link className='nav-link' to='/add'>Add</Link>
+                            <Link className="nav-link" to="/inventory/view">View Inventory</Link>
+                            <Link className="nav-link" to="/inventory/add">Add Item</Link>
+                            <Link className="nav-link" to="/inventory/delete">Delete Item</Link>
+                            <Link className="nav-link" to="/inventory/update">Update Item</Link>
 
+                            <Link className="nav-link" to="/employee/view">View Employees</Link>
+                            <Link className="nav-link" to="/employee/add">Add Employee</Link>
+                            <Link className="nav-link" to="/employee/delete">Fire Employee</Link>
+                            <Link className="nav-link" to="/employee/update">Update Employee</Link>
                         </div>
                     </div>
-
                 </div>
             </nav>
 
-            <div style={{height: "1.5rem"}}></div>
-
-        </header>
+        </div>
     );
 };
 
