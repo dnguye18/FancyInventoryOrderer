@@ -1,27 +1,39 @@
 import React, { useState } from 'react';
+import EmployeeApi from '../api/EmployeeApi';
 import '../css/createAccount.css';
 
 const CreateAccount = () => {
 
-        const[email, setEmail] = useState("")
-        const[first_name, setFirst_name] = useState("")
-        const[last_name, setLast_name] = useState("")
-        const[phone_number, setPhone_number] = useState("")
-        const[password, setPassword] = useState("")
+        const[user, setUser] =
+        useState({
+            id: 0,
+            username: "",
+            first_name: "",
+            last_name: "",
+            phone: "",
+            password: "",
+            role: "ROLE_USER",
+            orders: [],
+            enabled: true
+
+        });
+       
 
 
 
     const handleSubmit = (event) => {
-        const acc = {
-            "email": email,
-            "first_name": first_name,
-            "last_name": last_name,
-            "phone_number": phone_number,
-            "password": password
-        }
+
+        EmployeeApi.add(user)
 
 
         event.preventDefault()
+    }
+
+    const handleChange = (event) => {
+        setUser({
+            ...user,
+            [event.target.name]: event.target.value
+        })
     }
 
     
@@ -33,27 +45,24 @@ const CreateAccount = () => {
 
                 <form onSubmit={ handleSubmit } >
                     <div className='mb-3'>
-                        <input placeholder="Email" type="text" name="email" value={email} onChange={ (event) => { setEmail(event.target.value) } }/>  
+                        <input placeholder="Email" type="text" id="user-email" name="username" value={user.username} onChange={ handleChange }/>  
                     </div>
                     <div className='mb-3' style={{textAlign: "center"}}>
-                        <input placeholder="First Name" type="text" name="first_name" value={first_name} onChange={ (event) => { setFirst_name(event.target.value) } } />
+                        <input placeholder="First Name" type="text" id="user-first_name" name="first_name" value={user.first_name} onChange={ handleChange } />
                     </div>
                     <div className='mb-3' style={{textAlign: "center"}}>
-                        <input placeholder="Last Name" type="text" name="last_name" value={last_name} onChange={ (event) => { setLast_name(event.target.value) } } />
+                        <input placeholder="Last Name" type="text" id="user-last_name" name="last_name" value={user.last_name} onChange={ handleChange } />
                     </div>
                     <div className='mb-3' style={{textAlign: "center"}}>
-                        <input placeholder="Mobile Phone Number (Optional)" type="text" phone_number="phone_number" value={phone_number} onChange={ (event) => { setPhone_number(event.target.value) } } />
+                        <input placeholder="Mobile Phone Number (Optional)" id="user-phone" type="text" name="phone" value={user.phone} onChange={ handleChange } />
                     </div>
                     <div className='mb-3' style={{textAlign: "center"}}>
-                        <input placeholder="Create Password" type="text" password="password" value={password} onChange={ (event) => { setPassword(event.target.value) } }/>
-                        <br/>
-                        <button style={{ border:"4px solid black", textAlign: "center", width:"100%"  }} type="submit" className="btn btn-primary" value="Submit">
-                            Create Account
-                        </button> 
+                        <input placeholder="Create Password" type="text" id="user-password" name="password" value={user.password} onChange={ handleChange }/>
                     </div>
-                    <button style={{ border:"4px solid black", textAlign: "center", width:"100%"  }} type="submit" className="btn btn-primary" value="Submit">
+                    <button  type="submit" className="btn btn-primary" value="Submit">
                         Create Account
                     </button> 
+                    
                 </form>  
             </div>
         );

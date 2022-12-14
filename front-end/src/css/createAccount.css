@@ -23,7 +23,7 @@ input{
 .button{
     margin: 15px;
     border-radius: 5px;
-    border: solid 1px;
+    border: solid black 5px;
     background-color: #ae87f8;
     font-size: 17px;
     transition-duration: .2s;

@@ -8,11 +8,7 @@ function App() {
     <div className="Appcontainer">
       
       <Routes>
-<<<<<<< HEAD
-        <Route path="/login" element={<LandingPage />}/>
-=======
-        <Route path='/login' element={<LandingPage />} />
->>>>>>> front-end
+        <Route path='/' element={<LandingPage />} />
         <Route path="/create_profile" element={<CreateAccount />} />
       </Routes>
     </div>

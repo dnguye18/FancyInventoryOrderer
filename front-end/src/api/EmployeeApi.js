@@ -1,12 +1,12 @@
 // const BASE = "http://localhost:8080"  // use this if running locally
-const BASE = "http://0.0.0.0:8080" // edit this with your AWS endpoint
+const BASE = "http://localhost:8080" // edit this with your AWS endpoint
 const URI = BASE + "/api"
 
 const EmployeeApi = {
     
     getAll: (setEmployeeList) => {
 
-        fetch(URI + "/employee")
+        fetch(URI + "/user")
             .then( result => result.json() )
             .then( data => {
                 setEmployeeList(data)
@@ -16,14 +16,14 @@ const EmployeeApi = {
 
     add: (employee) => {
         
-        fetch(URI + "/add/employee", {
+        fetch(URI + "/user", {
             method: "POST",
             body: JSON.stringify(employee),
             headers: { "Content-Type": "application/json" }
         })
             .then( result => result.json() )
             .then( data => {
-
+                console.log(data.id);
                 if(typeof data.id !== 'undefined') {
 
                     console.log("CREATED EMPLOYEE:");
@@ -32,9 +32,9 @@ const EmployeeApi = {
                     alert(`EMPLOYEE CREATED \n` +
                         `------------------------\n` + 
                         `ID: ${data.id}\n` +
-                        `First Name: ${data.firstName}\n` +
-                        `Last Name: ${data.lastName}\n` +
-                        `Email: ${data.email}\n` +
+                        `First Name: ${data.first_name}\n` +
+                        `Last Name: ${data.last_name}\n` +
+                        `Email: ${data.username}\n` +
                         `Phone: ${data.phone}\n`
                     )
                 }
@@ -51,7 +51,7 @@ const EmployeeApi = {
 
     update: (employee, employeeList, setEmployeeList) => {
 
-        fetch(URI + "/update/employee",  {
+        fetch(URI + "/user",  {
             method: 'PUT',
             body: JSON.stringify(employee),
             headers: {  "Content-Type": "application/json" }
@@ -91,7 +91,7 @@ const EmployeeApi = {
 
     delete: (id) => {
 
-        fetch(URI + "/delete/employee/" + id, {
+        fetch(URI + "/user/" + id, {
             method: "DELETE"
         })
             .then( result => result.json() )
