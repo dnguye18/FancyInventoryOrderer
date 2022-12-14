@@ -94,4 +94,15 @@ public class UserService {
 		
 		return users;
 	}
+	
+	public User updateUserAddOrder(int id, Orders order) throws ResourceNotFoundException {
+		User user = getUserById(id);
+		
+		user.getOrders().add(order);
+		order.setUsr(user);
+		
+		repo.save(user);
+		
+		return user;
+	}
 }
