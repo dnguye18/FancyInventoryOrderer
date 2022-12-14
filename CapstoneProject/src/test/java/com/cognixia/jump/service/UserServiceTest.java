@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.cognixia.jump.exception.ResourceNotFoundException;
@@ -75,10 +76,14 @@ public class UserServiceTest {
 	
 	@Test
 	void testCreateUser() throws Exception {
-		//TODO
+		int id = 1;
+		User user = new User(1, "test1", "pw123", Role.ROLE_USER, "Testy", "McTester", "123-456-7890", true);
+		user.setOrders( new ArrayList<Orders>() );
 		
+		when( repo.save( Mockito.any(User.class) ) ).thenReturn( user );
+		User result = service.addUser( user );
 		
-		//TODO
+		assertEquals(user, result);
 	}
 	
 	@Test
