@@ -73,4 +73,10 @@ public class UserController {
 		User found = service.getUserByUsername(username);
 		return ResponseEntity.status(HttpStatus.OK).body( found );
 	}
+	
+	@PutMapping("/user/{id}/order/add")
+	public ResponseEntity<?> updateUserAddOrder(@PathVariable int id, @Valid @RequestBody Orders order) throws ResourceNotFoundException {
+		User updated = service.updateUserAddOrder(id, order);
+		return ResponseEntity.status(HttpStatus.OK).body( updated );
+	}
 }

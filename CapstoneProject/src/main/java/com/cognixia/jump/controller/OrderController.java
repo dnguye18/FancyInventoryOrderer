@@ -58,4 +58,10 @@ public class OrderController {
 		Orders deleted = service.deleteOrder(id);
 		return ResponseEntity.status(HttpStatus.OK).body( deleted );
 	}
+	
+	@PutMapping("/orders/{id}/item/add")
+	public ResponseEntity<?> updateOrderAddItem(@PathVariable int id, @Valid@RequestBody Item item) throws ResourceNotFoundException {
+		Orders updated = service.updateOrderAddItem(id, item);
+		return ResponseEntity.status(HttpStatus.OK).body( updated );
+	}
 }

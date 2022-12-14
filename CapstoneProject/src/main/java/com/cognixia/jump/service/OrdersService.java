@@ -52,7 +52,23 @@ public class OrdersService {
 	
 	public Orders deleteOrder(int id) throws ResourceNotFoundException {
 		Orders toDelete = getOrderById(id);
+	
+		for( Item i : toDelete.getItems() )
+			i.setOrder(null);
+		
 		repo.deleteById(id);
+		
 		return toDelete;
+	}
+	
+	public Orders updateOrderAddItem(int id, Item item) throws ResourceNotFoundException {
+		Orders order = getOrderById(id);
+		
+		order.getItems().add(item);
+		item.setOrder(order);
+		
+		repo.save(order);
+		
+		return order;
 	}
 }
