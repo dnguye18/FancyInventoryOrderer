@@ -68,7 +68,7 @@ public class UserControllerTest {
 		.andExpect( jsonPath("$[0].id").value( allUsers.get(0).getId() ) )
 		.andExpect( jsonPath("$[0].username").value( allUsers.get(0).getUsername() ) )
 		.andExpect( jsonPath("$[0].password").value( allUsers.get(0).getPassword() ) )
-		.andExpect( jsonPath("$[0].Role").value( allUsers.get(0).getRole() ) )
+		.andExpect( jsonPath("$[0].role").value( allUsers.get(0).getRole() ) )
 		.andExpect( jsonPath("$[0].first_name").value( allUsers.get(0).getFirst_name() ) )
 		.andExpect( jsonPath("$[0].last_name").value( allUsers.get(0).getLast_name() ) )
 		.andExpect( jsonPath("$[0].phone").value( allUsers.get(0).getPhone() ) )
@@ -184,7 +184,7 @@ public class UserControllerTest {
 	
 	@Test
 	void testDeleteUser() throws Exception {
-		String uri = STARTING_URI + "/user";
+		String uri = STARTING_URI + "/user/{id}";
 		int id = 1;
 		User user = new User(1, "test1", "pw123", Role.ROLE_USER, "Testy", "McTester", "123-456-7890", true);
 		
@@ -198,7 +198,7 @@ public class UserControllerTest {
 	
 	@Test
 	void testDeleteUserNotFound() throws Exception {
-		String uri = STARTING_URI + "/user";
+		String uri = STARTING_URI + "/user/{id}";
 		int id = 1;
 		
 		when( service.deleteUser(id) )
