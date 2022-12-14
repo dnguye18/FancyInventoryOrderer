@@ -23,7 +23,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	public static enum Role {
-		ROLE_USER, ROLE_MANAGER, ROLE_ADMIN
+		ROLE_USER, ROLE_ADMIN
 	}
 
 	@Id

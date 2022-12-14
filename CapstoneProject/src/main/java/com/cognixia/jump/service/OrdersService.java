@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.cognixia.jump.exception.ResourceNotFoundException;
 import com.cognixia.jump.model.Item;
 import com.cognixia.jump.model.Orders;
-import com.cognixia.jump.model.User;
 import com.cognixia.jump.repository.OrdersRepository;
 
 @Service
