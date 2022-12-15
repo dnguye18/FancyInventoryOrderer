@@ -1,16 +1,10 @@
 import React from "react";
-import { Route,Routes } from "react-router";
-import Header from '../components/Header';
-import InventoryView from '../components/Inventory/InventoryView';
+import Header from './Header';
 
 const signedInPage = () => {
     return(
         <div>
             <Header/>
-            <Routes>
-                <Route path='/inventory/view' element={<InventoryView />} />
-            </Routes>
-
         </div>
     )
 }
