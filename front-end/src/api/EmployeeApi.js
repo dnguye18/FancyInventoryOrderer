@@ -14,6 +14,22 @@ const EmployeeApi = {
             .catch( error => { console.log(error) } )
     },
 
+    getUser: (employee) => {
+        fetch(URI + "/user/{$id}")
+            .then(result => result.json())
+            .then(data => {
+                //do something here
+            })
+    },
+
+    getPassword:(password) => {
+        fetch(URI + "/user/{$password}")
+            .then(result => result.json())
+            .then(data=> {
+                //find password here
+            })
+    },
+
     add: (employee) => {
         
         fetch(URI + "/user", {

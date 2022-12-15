@@ -5,6 +5,10 @@ body{
     background-attachment: fixed;
 }
 
+form{
+    display: inline-block;
+}
+
 .container{
     border: solid white;
     margin: 0 auto;
