@@ -1,7 +1,6 @@
 package com.cognixia.jump.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cognixia.jump.exception.ResourceNotFoundException;
 import com.cognixia.jump.model.Item;
 import com.cognixia.jump.model.Orders;
-import com.cognixia.jump.repository.OrdersRepository;
 import com.cognixia.jump.service.OrdersService;
 
 @RestController
