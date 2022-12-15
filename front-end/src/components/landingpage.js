@@ -41,24 +41,11 @@ const handleChange = (event) => {
 }
 
     return(
-<<<<<<< HEAD
-        
-            <div className="container">
-                <p className="welcome">Fancy Inventory Orderer</p>
-                <img src="https://www.hanaretail.com/wp-content/uploads/2022/03/2-2.png" alt="loginPic"/>
-                <div className="loginContainer">
-                    <br></br>
-                    <input type="text" className="form__field" placeholder="Username" name="Username" id='Username' required />
-                    
-                    <br></br>
-                    <input type="password" className="form__field" placeholder="Password" name="Password" id='Password' required />
-=======
             <div className="container">
                 <p className="welcome">Fancy Inventory Orderer</p>
                 <img src="https://www.hanaretail.com/wp-content/uploads/2022/03/2-2.png" alt="loginPic"/>
                     <div className="loginContainer">
                         <form onSubmit={ handleSubmit } >
->>>>>>> vincent-front-end
 
                             <br></br>
                             <input type="text" class="form__field" placeholder="Username" name="Username" id='Username' onChange={ handleChange } required />
@@ -81,10 +68,6 @@ const handleChange = (event) => {
                             </a>
                         </div>
             </div>
-<<<<<<< HEAD
-        
-=======
->>>>>>> vincent-front-end
     )
 }
 
