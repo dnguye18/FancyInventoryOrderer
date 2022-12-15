@@ -7,10 +7,10 @@ const Header = () => {
     return(
         <div>
             <h1>Welcome To Fancy Inventory Orderer </h1>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="dropdown">
-                    <button class="dropbtn">Inventory</button>
-                    <div class="dropdown-content">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <div className="dropdown">
+                    <button className="dropbtn">Inventory</button>
+                    <div className="dropdown-content">
                         <Link className="nav-link" to='/inventory/view'>View</Link>
                         <Link className="nav-link" to='/inventory/add'>Add</Link>
                         <Link className="nav-link" to='/inventory/delete'>Delete</Link>
@@ -18,9 +18,9 @@ const Header = () => {
                     </div>
                 </div>
 
-                <div class="dropdown">
-                    <button class="dropbtn">Employee</button>
-                    <div class="dropdown-content">
+                <div className="dropdown">
+                    <button className="dropbtn">Employee</button>
+                    <div className="dropdown-content">
                         <Link className="nav-link" to='/employee/view'>View</Link>
                         <Link className="nav-link" to='/employee/delete'>Delete</Link>
                     </div>
