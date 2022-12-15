@@ -51,10 +51,10 @@ const handleChange = (event) => {
                         <form onSubmit={ handleSubmit } >
 
                             <br></br>
-                            <input type="text" class="form__field" placeholder="Username" name="username" id='Username' value={user.username} onChange={ handleChange } required />
+                            <input type="text" className="form__field" placeholder="Username" name="username" id='Username' value={user.username} onChange={ handleChange } required />
                             
                             <br></br>
-                            <input type="password" class="form__field" placeholder="Password" name="password" id='Password' value={user.password} onChange={ handleChange } required />
+                            <input type="password" className="form__field" placeholder="Password" name="password" id='Password' value={user.password} onChange={ handleChange } required />
 
                             <p></p>
 
