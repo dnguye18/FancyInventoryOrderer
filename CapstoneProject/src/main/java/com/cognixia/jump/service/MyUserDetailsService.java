@@ -29,7 +29,7 @@ public class MyUserDetailsService implements UserDetailsService {
 		Optional<User> userFound = repo.findByUsername(username);
 		
 		// if we can't find the user in our table, that means they don't exist
-		if( userFound.isEmpty() ) {
+		if( !userFound.isPresent() ) {
 			throw new UsernameNotFoundException(username);
 		}
 		
