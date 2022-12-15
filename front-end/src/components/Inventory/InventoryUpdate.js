@@ -2,6 +2,8 @@ import React, { useState ,useEffect } from "react";
 import InventoryApi from '../../api/InventoryApi';
 import Header from '../Header';
 import "bootstrap/dist/css/bootstrap.min.css";
+
+
 const InventoryUpdate = () => {
 
     const[item, setItem] =
@@ -19,9 +21,7 @@ const InventoryUpdate = () => {
        
     }, [] )
 
-    const handleChange = (event) => {
-    
-    }
+
 
     return(
         <div>
@@ -34,7 +34,6 @@ const InventoryUpdate = () => {
                         <th>Name</th>
                         <th>Price</th>
                         <th>Quantity</th>
-                        <th>Update</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,9 +44,6 @@ const InventoryUpdate = () => {
                                         <td>{i.name}</td>
                                         <td>{i.price}</td>
                                         <td>{i.qty}</td>
-                                        <button className="btn btn-primary" onChange={handleChange}>
-                                            Update
-                                        </button>
                                     </tr>
                             )
                     }
