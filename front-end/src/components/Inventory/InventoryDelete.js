@@ -6,6 +6,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 
 const InventoryDelete = () => {
+
+    const [ id, setId ] = useState(0)
     const[inventoryList, setInventoryList] = useState([])
     useEffect( () => {
         console.log("Hello, this component was mounted!")
@@ -13,13 +15,20 @@ const InventoryDelete = () => {
        
     }, [] )
 
-    /*const handleSubmit = (event, id) => {
+    const handleChange = (event) => {
+        setId({
+            ...id,
+            [event.target.id]: event.target.value
+        })
+    }
 
-        InventoryApi.delete(id)
+    const handleSubmit = (event) => {
+
+        InventoryApi.delete(document.getElementById("id").value)
 
 
         event.preventDefault()
-    }*/
+    }
 
 
     return(
@@ -33,7 +42,6 @@ const InventoryDelete = () => {
                         <th>Name</th>
                         <th>Price</th>
                         <th>Quantity</th>
-                        <th>Remove</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,15 +52,20 @@ const InventoryDelete = () => {
                                         <td>{i.name}</td>
                                         <td>{i.price}</td>
                                         <td>{i.qty}</td>
-                                        <td><button className="btn btn-danger" onClick={ InventoryApi.delete(i.id) } >
-                                                Delete
-                                        </button>
-                                        </td>
                                     </tr>
                             )
                     }
                 </tbody>
             </table>
+        
+            <form onSubmit={ handleSubmit } >
+                <div className='mb-3'>
+                    <input placeholder="What Item ID to Delete?" type="text" name="id" id="id" onChange={ handleChange }/>
+                </div>
+            <button className="btn btn-danger" onClick={handleSubmit} >
+                Delete
+            </button>
+            </form>
         </div>
     )
 }

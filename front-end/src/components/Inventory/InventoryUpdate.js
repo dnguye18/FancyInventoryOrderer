@@ -4,16 +4,12 @@ import Header from '../Header';
 import "bootstrap/dist/css/bootstrap.min.css";
 const InventoryUpdate = () => {
 
-    // do this
     const[item, setItem] =
     useState({
         id: 0,
         name: "",
         price: "",
         qty: "",
-        orders: [],
-        enabled: true
-
     });
 
     const[inventoryList, setInventoryList] = useState([])
