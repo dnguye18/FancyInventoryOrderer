@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import InventoryApi from '../../api/InventoryApi';
+import Header from '../Header';
 
 const InventoryAdd = () => {
 
@@ -28,6 +29,7 @@ const InventoryAdd = () => {
 
     return (
         <div>
+            <Header/>
             <h1>Create Item Page</h1>
 
             <form onSubmit={ handleSubmit }>
