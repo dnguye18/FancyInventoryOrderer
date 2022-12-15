@@ -12,24 +12,24 @@ const Header = () => {
                     <button class="dropbtn">Inventory</button>
                     <div class="dropdown-content">
                         <Link className="nav-link" to='/inventory/view'>View</Link>
-                        <Link to="/">Add</Link>
-                        <Link to="/">Delete</Link>
-                        <Link to="/">Update</Link>
+                        <Link className="nav-link" to='/inventory/add'>Add</Link>
+                        <Link className="nav-link" to='/inventory/delete'>Delete</Link>
+                        <Link className="nav-link" to='/inventory/update'>Update</Link>
                     </div>
                 </div>
 
                 <div class="dropdown">
                     <button class="dropbtn">Employee</button>
                     <div class="dropdown-content">
-                        <Link to="/">View</Link>
-                        <Link to="/">Add</Link>
-                        <Link to="/">Delete</Link>
-                        <Link to="/">Update</Link>
+                        <Link className="nav-link" to='/employee/view'>View</Link>
+                        <Link className="nav-link" to='/employee/add'>Add</Link>
+                        <Link className="nav-link" to='/employee/delete'>Delete</Link>
+                        <Link className="nav-link" to='/employee/update'>Update</Link>
                     </div>
                 </div>
 
-                <Link to="/" class="btn btn-info btn-lg">
-                    <span class="glyphicon glyphicon-log-out">Log out</span>
+                <Link to="/">
+                    <button className='signOut'>Log out</button>
                 </Link>
             </nav>
         </div>

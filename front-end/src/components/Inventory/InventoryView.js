@@ -1,6 +1,6 @@
 import React, { useState ,useEffect } from "react";
 import InventoryApi from '../../api/InventoryApi';
-import Header from "../Header";
+import Header from '../Header';
 
 const productDummyList = [
     {
@@ -34,7 +34,7 @@ const InventoryView = () => {
 
     return(
         <div>
-            <Header />
+            <Header/>
             <h1>Inventory View Page</h1>
             <table className='table'>
                 <thead>
