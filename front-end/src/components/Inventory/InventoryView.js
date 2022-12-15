@@ -2,27 +2,6 @@ import React, { useState ,useEffect } from "react";
 import InventoryApi from '../../api/InventoryApi';
 import Header from '../Header';
 
-const productDummyList = [
-    {
-        "id": 1,
-        "name": "phone",
-        "price": 1100.99,
-        "qty": 7
-    },
-    {
-        "id": 2,
-        "name": "mug",
-        "price": 11.99,
-        "qty": 23
-    },
-    {
-        "id": 3,
-        "name": "book",
-        "price": 23.99,
-        "qty": 12
-    }
-]
-
 const InventoryView = () => {
 
     const[inventoryList, setInventoryList] = useState([])
