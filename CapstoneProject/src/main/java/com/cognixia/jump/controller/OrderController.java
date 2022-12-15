@@ -64,4 +64,10 @@ public class OrderController {
 		Orders updated = service.updateOrderAddItem(id, item);
 		return ResponseEntity.status(HttpStatus.OK).body( updated );
 	}
+	
+	@PutMapping("/orders/{id}/complete")
+	public ResponseEntity<?> updateOrderComplete(@PathVariable int id) throws ResourceNotFoundException {
+		Orders updated = service.updateOrderCompleted(id);
+		return ResponseEntity.status(HttpStatus.OK).body( updated );
+	}
 }

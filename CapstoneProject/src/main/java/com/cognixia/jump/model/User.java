@@ -31,7 +31,7 @@ public class User implements Serializable {
 	private Integer id;
 	
 	@NotBlank
-	@Column( nullable = false )
+	@Column( unique = true, nullable = false )
 	private String username;
 	
 	@NotBlank
