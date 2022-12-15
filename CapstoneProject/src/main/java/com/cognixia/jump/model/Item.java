@@ -25,8 +25,8 @@ public class Item implements Serializable {
 	
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn( name="order_id", referencedColumnName="id" )
-	private Orders order;
+	@JoinColumn( name="user_id", referencedColumnName="id" )
+	private User user;
 	
 	@NotBlank
 	@Column( unique = true, nullable = false )
@@ -43,10 +43,10 @@ public class Item implements Serializable {
 		
 	}
 
-	public Item(Integer id, Orders order, @NotBlank String name, @NotBlank String price, @NotBlank Integer qty) {
+	public Item(Integer id, User usr, @NotBlank String name, @NotBlank String price, @NotBlank Integer qty) {
 		super();
 		this.id = id;
-		this.order = order;
+		this.user = usr;
 		this.name = name;
 		this.price = price;
 		this.qty = qty;
@@ -60,12 +60,12 @@ public class Item implements Serializable {
 		this.id = id;
 	}
 
-	public Orders getOrder() {
-		return order;
+	public User getUser() {
+		return user;
 	}
 	
-	public void setOrder(Orders order) {
-		this.order = order;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	public String getName() {

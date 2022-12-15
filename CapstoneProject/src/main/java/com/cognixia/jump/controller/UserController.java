@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cognixia.jump.exception.ResourceNotFoundException;
-import com.cognixia.jump.model.Orders;
+import com.cognixia.jump.model.Item;
 import com.cognixia.jump.model.User;
 import com.cognixia.jump.service.UserService;
 
@@ -71,9 +71,9 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.OK).body( found );
 	}
 	
-	@PutMapping("/user/{id}/order/add")
-	public ResponseEntity<?> updateUserAddOrder(@PathVariable int id, @Valid @RequestBody Orders order) throws ResourceNotFoundException {
-		User updated = service.updateUserAddOrder(id, order);
+	@PutMapping("/user/{id}/item/add")
+	public ResponseEntity<?> updateUserAddItem(@PathVariable int id, @Valid @RequestBody Item item) throws ResourceNotFoundException {
+		User updated = service.updateUserAddItem(id, item);
 		return ResponseEntity.status(HttpStatus.OK).body( updated );
 	}
 }

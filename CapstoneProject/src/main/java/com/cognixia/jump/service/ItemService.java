@@ -47,7 +47,7 @@ public class ItemService {
 	
 	public Item deleteItem(int id) throws ResourceNotFoundException {
 		Item toDelete = getItemById(id);
-		toDelete.getOrder().getItems().remove(toDelete);
+		toDelete.getUser().getItems().remove(toDelete);
 		repo.deleteById(id);
 		return toDelete;
 	}

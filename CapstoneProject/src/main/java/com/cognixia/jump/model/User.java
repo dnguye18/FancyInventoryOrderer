@@ -57,8 +57,8 @@ public class User implements Serializable {
 	private boolean enabled;
 	
 	@JsonManagedReference
-	@OneToMany( mappedBy = "usr", cascade = CascadeType.ALL )
-	private List<Orders> orders;
+	@OneToMany( mappedBy = "user", cascade = CascadeType.ALL )
+	private List<Item> items;
 	
 	public User() {
 		
@@ -141,12 +141,12 @@ public class User implements Serializable {
 		this.enabled = enabled;
 	}
 	
-	public List<Orders> getOrders() {
-		return orders;
+	public List<Item> getItems() {
+		return items;
 	}
 	
-	public void setOrders(List<Orders> orders) {
-		this.orders = orders;
+	public void setOrders(List<Item> items) {
+		this.items = items;
 	}
 
 	@Override
