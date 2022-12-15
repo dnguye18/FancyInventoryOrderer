@@ -22,8 +22,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.cognixia.jump.exception.ResourceNotFoundException;
 import com.cognixia.jump.model.Item;
-import com.cognixia.jump.model.Orders;
-import com.cognixia.jump.model.Orders.Progress;
+import com.cognixia.jump.model.User;
+import com.cognixia.jump.model.User.Role;
 import com.cognixia.jump.repository.ItemRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -78,7 +78,7 @@ public class ItemServiceTest {
 	void testAddItem() throws Exception {
 		int id = 1;
 		Item item = new Item(1, null, "banana", "0.99", 4);
-		item.setOrder( new Orders(1, Progress.COMPLETED, null) );
+		item.setUser( null );
 	
 		when( repo.save( Mockito.any( Item.class ) ) ).thenReturn( item );
 		
@@ -91,7 +91,7 @@ public class ItemServiceTest {
 	void testUpdateItem() throws Exception {
 		int id = 1;
 		Item item = new Item(1, null, "banana", "0.99", 4);
-		item.setOrder( new Orders(1, Progress.COMPLETED, null) );
+		item.setUser( new User(1, "test1", "pw123", Role.ROLE_USER, "Testy", "McTester", "123-456-7890", true) );
 	
 		when( repo.existsById( id ) ).thenReturn( true );
 		when( repo.save( Mockito.any( Item.class ) ) ).thenReturn( item );
