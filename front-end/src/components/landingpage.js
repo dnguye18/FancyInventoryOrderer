@@ -5,27 +5,27 @@ import EmployeeApi from '../api/EmployeeApi';
 
 const LandingPage = () => {
     const[user, setUser] =
-    useState({
-        id: 0,
-        username: "",
-        first_name: "",
-        last_name: "",
-        phone: "",
-        password: "",
-        role: "ROLE_USER",
-        orders: [],
-        enabled: true
-
-    });
+        useState({
+            id: 0,
+            username: "",
+            first_name: "",
+            last_name: "",
+            phone: "",
+            password: "",
+            role: "ROLE_USER",
+            orders: [],
+            enabled: true
+        });
    
 
 
 
 const handleSubmit = (event) => {
+    // can't do getUserById b/c we don't know id yet
+    EmployeeApi.getUserByUsername(user, setUser)
 
-    EmployeeApi.getUser(user)
-    //Use EmployeeApi to get the password
-    //EmployeeApi.getPassword(password)
+    // given user info in user var
+    // if user.password == password, then good to go (idk if encoded or decoded  *NEED TO TEST*)
 
 
     event.preventDefault()
@@ -36,29 +36,14 @@ const handleChange = (event) => {
         ...user,
         [event.target.name]: event.target.value
     })
-
-    //set Password here
 }
 
     return(
-<<<<<<< HEAD
-        
-            <div className="container">
-                <p className="welcome">Fancy Inventory Orderer</p>
-                <img src="https://www.hanaretail.com/wp-content/uploads/2022/03/2-2.png" alt="loginPic"/>
-                <div className="loginContainer">
-                    <br></br>
-                    <input type="text" className="form__field" placeholder="Username" name="Username" id='Username' required />
-                    
-                    <br></br>
-                    <input type="password" className="form__field" placeholder="Password" name="Password" id='Password' required />
-=======
             <div className="container">
                 <p className="welcome">Fancy Inventory Orderer</p>
                 <img src="https://www.hanaretail.com/wp-content/uploads/2022/03/2-2.png" alt="loginPic"/>
                     <div className="loginContainer">
                         <form onSubmit={ handleSubmit } >
->>>>>>> vincent-front-end
 
                             <br></br>
                             <input type="text" class="form__field" placeholder="Username" name="Username" id='Username' onChange={ handleChange } required />
@@ -81,10 +66,6 @@ const handleChange = (event) => {
                             </a>
                         </div>
             </div>
-<<<<<<< HEAD
-        
-=======
->>>>>>> vincent-front-end
     )
 }
 

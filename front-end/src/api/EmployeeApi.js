@@ -4,37 +4,45 @@ const URI = BASE + "/api"
 
 const EmployeeApi = {
     
-    getAll: (setEmployeeList) => {
+    getAll: (setUserList) => {
 
         fetch(URI + "/user")
             .then( result => result.json() )
             .then( data => {
-                setEmployeeList(data)
+                setUserList(data)
             } )
             .catch( error => { console.log(error) } )
     },
 
-    getUser: (employee) => {
-        fetch(URI + "/user/{$id}")
+    getUserById: (id, setUser) => {
+        fetch(URI + "/user/" + id)
             .then(result => result.json())
             .then(data => {
-                //do something here
+                if(typeof data.username !== 'undefined') {
+                    setUser(data)
+                } else {
+                    alert("Username already exists!")
+                }
             })
     },
 
-    getPassword:(password) => {
-        fetch(URI + "/user/{$password}")
+    getUserByUsername: (user, setUser) => {
+        fetch(URI + "/user/username/" + user.username)
             .then(result => result.json())
-            .then(data=> {
-                //find password here
+            .then(data => {
+                if(typeof data.username !== 'undefined') {
+                    setUser(data)
+                } else {
+                    alert("Username already exists!")
+                }
             })
     },
 
-    add: (employee) => {
+    add: (user) => {
         
         fetch(URI + "/user", {
             method: "POST",
-            body: JSON.stringify(employee),
+            body: JSON.stringify(user),
             headers: { "Content-Type": "application/json" }
         })
             .then( result => result.json() )
@@ -42,10 +50,10 @@ const EmployeeApi = {
                 console.log(data.id);
                 if(typeof data.id !== 'undefined') {
 
-                    console.log("CREATED EMPLOYEE:");
+                    console.log("CREATED USER:");
                     console.log(data);
 
-                    alert(`EMPLOYEE CREATED \n` +
+                    alert(`USER CREATED \n` +
                         `------------------------\n` + 
                         `ID: ${data.id}\n` +
                         `First Name: ${data.first_name}\n` +
@@ -55,7 +63,7 @@ const EmployeeApi = {
                     )
                 }
                 else {
-                    alert("Employee can't be created, check that you are not using an email already in use by another employee.")
+                    alert("User can't be created, check that you are not using an email already in use by another user.")
                 }
 
             } )
@@ -65,11 +73,28 @@ const EmployeeApi = {
 
     },
 
-    update: (employee, employeeList, setEmployeeList) => {
+    addOrder: (id, order, setOrder) => {
+        fetch(URI + "/user/" + id + "/order/add", {
+            method: 'PUT',
+            body: JSON.stringify(order),
+            headers: { "Content-Type": "application/json"}
+        })
+            .then( result => result.json() )
+            .then( data => {
+                if( typeof data.id != 'undefined' ) {
+                    setOrder(order)
+                } else {
+                    alert("Order can't be added to user")
+                }
+            })
+            .catch( error => { console.log(error) } )
+    },
+
+    update: (user, userList, setUserList) => {
 
         fetch(URI + "/user",  {
             method: 'PUT',
-            body: JSON.stringify(employee),
+            body: JSON.stringify(user),
             headers: {  "Content-Type": "application/json" }
         })
             .then( result => result.json() )
@@ -80,7 +105,7 @@ const EmployeeApi = {
                     console.log("UPDATED:");
                     console.log(data);
 
-                    const newList = [...employeeList];
+                    const newList = [...userList];
 
                     let index = -1;
 
@@ -94,10 +119,10 @@ const EmployeeApi = {
 
                     newList.splice(index, 1, data)
 
-                    setEmployeeList(newList)
+                    setUserList(newList)
                 }
                 else {
-                    alert("Error updating employee, email choosen may already be in use by another employee")
+                    alert("Error updating user, email choosen may already be in use by another user")
                 }
                 
             } )
@@ -116,7 +141,6 @@ const EmployeeApi = {
                 console.log(data);
             } )
             .catch(error => { console.log(error); })
-
     }
 }
 
