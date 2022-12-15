@@ -29,8 +29,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.cognixia.jump.exception.ResourceNotFoundException;
 import com.cognixia.jump.model.Item;
-import com.cognixia.jump.model.Orders;
-import com.cognixia.jump.model.Orders.Progress;
 import com.cognixia.jump.service.ItemService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -64,12 +62,12 @@ public class ItemControllerTest {
 			.andExpect( content().contentType( MediaType.APPLICATION_JSON_VALUE ) )
 			.andExpect( jsonPath("$.length()").value( allItems.size() ) )
 			.andExpect( jsonPath("$[0].id").value( allItems.get(0).getId() ) )
-			.andExpect( jsonPath("$[0].order").value( allItems.get(0).getOrder() ) )
+			.andExpect( jsonPath("$[0].user").value( allItems.get(0).getUser() ) )
 			.andExpect( jsonPath("$[0].name").value( allItems.get(0).getName() ) )
 			.andExpect( jsonPath("$[0].price").value( allItems.get(0).getPrice() ) )
 			.andExpect( jsonPath("$[0].qty").value( allItems.get(0).getQty() ) )
 			.andExpect( jsonPath("$[1].id").value( allItems.get(1).getId() ) )
-			.andExpect( jsonPath("$[1].order").value( allItems.get(1).getOrder() ) )
+			.andExpect( jsonPath("$[1].user").value( allItems.get(1).getUser() ) )
 			.andExpect( jsonPath("$[1].name").value( allItems.get(1).getName() ) )
 			.andExpect( jsonPath("$[1].price").value( allItems.get(1).getPrice() ) )
 			.andExpect( jsonPath("$[1].qty").value( allItems.get(1).getQty() ) )
@@ -92,7 +90,7 @@ public class ItemControllerTest {
 			.andExpect( status().isOk() )
 			.andExpect( content().contentType( MediaType.APPLICATION_JSON_VALUE ) )
 			.andExpect( jsonPath("$.id").value( item.getId() ) )
-			.andExpect( jsonPath("$.order").value( item.getOrder() ) )
+			.andExpect( jsonPath("$.user").value( item.getUser() ) )
 			.andExpect( jsonPath("$.name").value( item.getName() ) )
 			.andExpect( jsonPath("$.price").value( item.getPrice() ) )
 			.andExpect( jsonPath("$.qty").value( item.getQty() ) )

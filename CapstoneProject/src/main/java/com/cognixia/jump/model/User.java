@@ -145,7 +145,7 @@ public class User implements Serializable {
 		return items;
 	}
 	
-	public void setOrders(List<Item> items) {
+	public void setItems(List<Item> items) {
 		this.items = items;
 	}
 

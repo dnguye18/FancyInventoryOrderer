@@ -20,8 +20,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.cognixia.jump.exception.ResourceNotFoundException;
-import com.cognixia.jump.model.Orders;
-import com.cognixia.jump.model.Orders.Progress;
+import com.cognixia.jump.model.Item;
 import com.cognixia.jump.model.User;
 import com.cognixia.jump.model.User.Role;
 import com.cognixia.jump.repository.UserRepository;
@@ -76,9 +75,8 @@ public class UserServiceTest {
 	
 	@Test
 	void testCreateUser() throws Exception {
-		int id = 1;
 		User user = new User(1, "test1", "pw123", Role.ROLE_USER, "Testy", "McTester", "123-456-7890", true);
-		user.setOrders( new ArrayList<Orders>() );
+		user.setItems( new ArrayList<Item>() );
 		
 		when( repo.save( Mockito.any(User.class) ) ).thenReturn( user );
 		User result = service.addUser( user );
@@ -90,10 +88,7 @@ public class UserServiceTest {
 	void testUpdateUser() throws Exception {
 		int id = 1;
 		User user = new User(1, "test1", "pw123", Role.ROLE_USER, "Testy", "McTester", "123-456-7890", true);
-		List<Orders> orders = new ArrayList<Orders>();
-		orders.add(new Orders(1, Progress.COMPLETED, null));
-		orders.add(new Orders(1, Progress.IN_PROGRESS, null));
-		user.setOrders(orders);
+		user.setItems(new ArrayList<Item>());
 		
 		when( repo.existsById( id ) ).thenReturn(true);
 		when( repo.save( user ) ).thenReturn( user );
