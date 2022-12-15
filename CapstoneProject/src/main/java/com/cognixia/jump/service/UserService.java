@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cognixia.jump.exception.ResourceNotFoundException;
-import com.cognixia.jump.model.Orders;
+import com.cognixia.jump.model.Item;
 import com.cognixia.jump.model.User;
 import com.cognixia.jump.model.User.Role;
 import com.cognixia.jump.repository.UserRepository;
@@ -39,9 +39,9 @@ public class UserService {
 		user.setId(null);
 		user.setPassword( encoder.encode( user.getPassword() ) );
 		
-		for(Orders o : user.getOrders() ) {
-			o.setId(null);
-			o.setUsr(user);
+		for(Item i : user.getItems() ) {
+			i.setId(null);
+			i.setUser(user);
 		}
 		
 		User saved = repo.save( user );
@@ -53,8 +53,8 @@ public class UserService {
 			throw new ResourceNotFoundException("User", user.getId());
 		
 		
-		for( Orders order : user.getOrders() ) 
-			order.setUsr(user);
+		for( Item item : user.getItems() ) 
+			item.setUser(user);
 		
 		
 		User updated = repo.save(user);
@@ -95,11 +95,11 @@ public class UserService {
 		return users;
 	}
 	
-	public User updateUserAddOrder(int id, Orders order) throws ResourceNotFoundException {
+	public User updateUserAddItem(int id, Item item) throws ResourceNotFoundException {
 		User user = getUserById(id);
 		
-		user.getOrders().add(order);
-		order.setUsr(user);
+		user.getItems().add(item);
+		item.setUser(user);
 		
 		repo.save(user);
 		
