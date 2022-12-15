@@ -1,41 +1,20 @@
-import React, {useState, useEffect} from 'react';
-import EmployeeApi from '../../api/EmployeeApi'
+import React, { useState ,useEffect } from "react";
+import EmployeeApi from '../../api/EmployeeApi';
 import Header from '../Header';
-
 
 const EmployeeDelete = () => {
 
-    const [ id, setId ] = useState(0)
     const[employeeList, setEmployeeList] = useState([])
-    
-
     useEffect( () => {
         console.log("Hello, this component was mounted!")
         EmployeeApi.getAll(setEmployeeList)
-
+       
     }, [] )
 
-    const handleChange = (event) => {
-        setId({
-            ...id,
-            [event.target.id]: event.target.value
-        })
-    }
-
-
-    const handleSubmit = (event) => {
-
-        EmployeeApi.delete(document.getElementById("id").value)
-        alert("Employee has been deleted")
-
-        event.preventDefault()
-    }
-    
-    
-    return (
-        <div className='body'>
+    return(
+        <div>
             <Header/>
-            <h2 className="display-4">Removing an Employee</h2>
+            <h1>Who To Fire</h1>
             <table className='table'>
                 <thead>
                     <tr>
@@ -43,33 +22,27 @@ const EmployeeDelete = () => {
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Phone Number</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        employeeList.map( e =>  
-                            <tr key={e.id}>
-                                <td>{e.id}</td>
-                                <td>{e.first_name}</td>
-                                <td>{e.last_name}</td>
-                                <td>{e.phone}</td>
-                            </tr>
-                        )
+                        employeeList.map( i =>  
+                                    <tr key={i.id}>
+                                        <td>{i.id}</td>
+                                        <td>{i.first_name}</td>
+                                        <td>{i.last_name}</td>
+                                        <td>{i.phoneNum}</td>
+                                        <button className="btn btn-danger">
+                                                Delete
+                                        </button>
+                                    </tr>
+                            )
                     }
                 </tbody>
-            </table> 
-            <form onSubmit={ handleSubmit } >
-                <div className='mb-3'>
-                    <input placeholder="What Item ID to Delete?" type="text" name="id" id="id" onChange={ handleChange }/>
-                </div>
-                <button type="delete" className='btn btn-danger' value="Delete" onClick={handleSubmit}>Delete Employee</button>
-            </form>
+            </table>
         </div>
-            
-            
-        
-    );
-    
-};
+    )
+}
 
-export default EmployeeDelete;
+export default EmployeeDelete

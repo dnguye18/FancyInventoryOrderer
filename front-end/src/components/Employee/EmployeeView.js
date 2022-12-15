@@ -1,25 +1,20 @@
-import React,  { useState ,useEffect }  from 'react';
+import React, { useState ,useEffect } from "react";
 import EmployeeApi from '../../api/EmployeeApi';
 import Header from '../Header';
 
 const EmployeeView = () => {
 
-
-
     const[employeeList, setEmployeeList] = useState([])
-    
     useEffect( () => {
         console.log("Hello, this component was mounted!")
         EmployeeApi.getAll(setEmployeeList)
        
     }, [] )
 
-
-
-    return (
+    return(
         <div>
-            <Header />
-            <h1>Employee View Page</h1>
+            <Header/>
+            <h1>Viewing All Employees</h1>
             <table className='table'>
                 <thead>
                     <tr>
@@ -31,19 +26,19 @@ const EmployeeView = () => {
                 </thead>
                 <tbody>
                     {
-                        employeeList.map( e =>  
-                            <tr key={e.id}>
-                                <td>{e.id}</td>
-                                <td>{e.first_name}</td>
-                                <td>{e.last_name}</td>
-                                <td>{e.phone}</td>
-                            </tr>
-                        )
+                        employeeList.map( i =>  
+                                    <tr key={i.id}>
+                                        <td>{i.id}</td>
+                                        <td>{i.first_name}</td>
+                                        <td>{i.last_name}</td>
+                                        <td>{i.phoneNum}</td>
+                                    </tr>
+                            )
                     }
                 </tbody>
-            </table> 
+            </table>
         </div>
-    );
-};
+    )
+}
 
-export default EmployeeView;
+export default EmployeeView

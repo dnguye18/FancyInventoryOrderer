@@ -20,9 +20,6 @@ const InventoryAdd = () => {
         // make a POST request here to create the product
         InventoryApi.add(item, setId)
 
-       
-
-
         // stop the page from refreshing/reloading when submitting the form
         event.preventDefault()
     }

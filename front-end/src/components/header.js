@@ -22,7 +22,6 @@ const Header = () => {
                     <button className="dropbtn">Employee</button>
                     <div className="dropdown-content">
                         <Link className="nav-link" to='/employee/view'>View</Link>
-                        <Link className="nav-link" to='/employee/add'>Add</Link>
                         <Link className="nav-link" to='/employee/delete'>Delete</Link>
                         <Link className="nav-link" to='/employee/update'>Update</Link>
                     </div>
