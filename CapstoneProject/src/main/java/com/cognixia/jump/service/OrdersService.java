@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.cognixia.jump.exception.ResourceNotFoundException;
 import com.cognixia.jump.model.Item;
 import com.cognixia.jump.model.Orders;
+import com.cognixia.jump.model.Orders.Progress;
 import com.cognixia.jump.repository.OrdersRepository;
 
 @Service
@@ -32,6 +33,7 @@ public class OrdersService {
 	
 	public Orders addOrder(Orders order) {
 		order.setId(null);
+		order.setProgress(Progress.NOT_STARTED);
 		Orders created = repo.save( order );
 		return created;
 	}
@@ -44,6 +46,7 @@ public class OrdersService {
 		for(Item i : order.getItems()) {
 			i.setOrder(order);
 		}
+		order.setProgress(Progress.IN_PROGRESS);
 		
 		Orders updated = repo.save( order );
 		
@@ -64,11 +67,22 @@ public class OrdersService {
 	public Orders updateOrderAddItem(int id, Item item) throws ResourceNotFoundException {
 		Orders order = getOrderById(id);
 		
+		order.setProgress(Progress.IN_PROGRESS);
 		order.getItems().add(item);
 		item.setOrder(order);
 		
-		repo.save(order);
+		Orders updated = repo.save(order);
 		
-		return order;
+		return updated;
+	}
+	
+	public Orders updateOrderCompleted(int id) throws ResourceNotFoundException {
+		Orders order = getOrderById(id);
+		
+		order.setProgress(Progress.COMPLETED);
+		
+		Orders updated = repo.save(order);
+		
+		return updated;
 	}
 }
