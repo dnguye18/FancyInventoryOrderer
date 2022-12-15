@@ -5,11 +5,9 @@ import Header from '../Header';
 
 const EmployeeDelete = () => {
 
+    const [ id, setId ] = useState(0)
     const[employeeList, setEmployeeList] = useState([])
     
-    const[employee] = useState({
-        
-    })
 
     useEffect( () => {
         console.log("Hello, this component was mounted!")
@@ -17,9 +15,17 @@ const EmployeeDelete = () => {
 
     }, [] )
 
+    const handleChange = (event) => {
+        setId({
+            ...id,
+            [event.target.id]: event.target.value
+        })
+    }
+
+
     const handleSubmit = (event) => {
 
-        EmployeeApi.delete()
+        EmployeeApi.delete(document.getElementById("id").value)
         alert("Employee has been deleted")
 
         event.preventDefault()
@@ -29,7 +35,7 @@ const EmployeeDelete = () => {
     return (
         <div className='body'>
             <Header/>
-            <h2 className="display-4">Delete Page</h2>
+            <h2 className="display-4">Removing an Employee</h2>
             <table className='table'>
                 <thead>
                     <tr>
@@ -37,7 +43,6 @@ const EmployeeDelete = () => {
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Phone Number</th>
-                        <th>Delete Employee</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,12 +53,17 @@ const EmployeeDelete = () => {
                                 <td>{e.first_name}</td>
                                 <td>{e.last_name}</td>
                                 <td>{e.phone}</td>
-                                <td><button type="delete" className='btn btn-danger' value="Delete" onClick={handleSubmit}>Delete Employee</button></td>
                             </tr>
                         )
                     }
                 </tbody>
             </table> 
+            <form onSubmit={ handleSubmit } >
+                <div className='mb-3'>
+                    <input placeholder="What Item ID to Delete?" type="text" name="id" id="id" onChange={ handleChange }/>
+                </div>
+                <button type="delete" className='btn btn-danger' value="Delete" onClick={handleSubmit}>Delete Employee</button>
+            </form>
         </div>
             
             
