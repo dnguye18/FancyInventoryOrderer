@@ -1,41 +1,39 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../css/header.css';
+
 
 const Header = () => {
-    return (
-        <header>
-            <h1 className="display-2">Welcome To Fancy Inventory Orderer</h1>
-
-            <nav className='navbar navbar-expand-lg bg-light'>
-                <div className='container-fluid'>
-                    
-                    <Link className='navbar-brand' to='/'>Home</Link>
-
-                    <button className='navbar-toggler' 
-                            type='button' 
-                            data-bs-toggle='collapse' data-bs-target='#navbarNavAltMarkup' aria-controls='navbarNavAltMarkup' aria-expanded='false' 
-                            aria-label='Toggle navigation' >
-                        <span className='navbar-toggler-icon'></span>
-                    </button>
-                    
-                    <div className='collapse navbar-collapse'
-                         id='navbarNavAltMarkup'>
-                        <div className='navbar-nav'>
-
-                            <Link className='nav-link' to='/view'>View</Link>
-
-                            <Link className='nav-link' to='/add'>Add</Link>
-
-                        </div>
+    return(
+        <div>
+            <h1>Welcome To Fancy Inventory Orderer </h1>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="dropdown">
+                    <button class="dropbtn">Inventory</button>
+                    <div class="dropdown-content">
+                        <Link className="nav-link" to='/inventory/view'>View</Link>
+                        <Link to="/">Add</Link>
+                        <Link to="/">Delete</Link>
+                        <Link to="/">Update</Link>
                     </div>
-
                 </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Employee</button>
+                    <div class="dropdown-content">
+                        <Link to="/">View</Link>
+                        <Link to="/">Add</Link>
+                        <Link to="/">Delete</Link>
+                        <Link to="/">Update</Link>
+                    </div>
+                </div>
+
+                <Link to="/" class="btn btn-info btn-lg">
+                    <span class="glyphicon glyphicon-log-out">Log out</span>
+                </Link>
             </nav>
+        </div>
+    )
+}
 
-            <div style={{height: "1.5rem"}}></div>
-
-        </header>
-    );
-};
-
-export default Header;
+export default Header
