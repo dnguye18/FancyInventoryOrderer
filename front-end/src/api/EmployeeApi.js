@@ -30,7 +30,7 @@ const EmployeeApi = {
             })
     },
 
-    add: (employee) => {
+    add: (employee, setEmployeeId) => {
         
         fetch(URI + "/user", {
             method: "POST",

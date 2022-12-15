@@ -9,7 +9,6 @@ import InventoryUpdate from './components/Inventory/InventoryUpdate';
 import InventoryDelete from './components/Inventory/InventoryDelete';
 
 import EmployeeView from './components/Employee/EmployeeView';
-import EmployeeAdd from './components/Employee/EmployeeAdd';
 import EmployeeDelete from './components/Employee/EmployeeDelete';
 import EmployeeUpdate from './components/Employee/EmployeeUpdate';
 
@@ -27,7 +26,6 @@ function App() {
         <Route path='/inventory/update' element={<InventoryUpdate />} />
 
         <Route path='/employee/view' element={<EmployeeView />} />
-        <Route path='/employee/add' element={<EmployeeAdd />} />
         <Route path='/employee/delete' element={<EmployeeDelete />} />
         <Route path='/employee/update' element={<EmployeeUpdate />} />
       </Routes>

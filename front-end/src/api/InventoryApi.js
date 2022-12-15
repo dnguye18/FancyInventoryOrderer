@@ -4,7 +4,7 @@ const URI = BASE + "/api"
 const InventoryApi = {
     
     getAll:(setInventoryList) => {
-        fetch(URI + "/inventory")
+        fetch(URI + "/item")
             .then(result => result.json())
             .then(data => {
                 setInventoryList(data)
@@ -13,7 +13,7 @@ const InventoryApi = {
     },
 
     add: (item,setId) =>{
-        fetch(URI + "/inventory",{
+        fetch(URI + "/item",{
             method: "POST",
             body: JSON.stringify(item),
             headers: {"Content-Type": "application/json"}
@@ -44,7 +44,7 @@ const InventoryApi = {
     },
 
     update:(item, InventoryList, setInventoryList) => {
-        fetch(URI + "/inventory", {
+        fetch(URI + "/item", {
             method: 'PUT',
             body: JSON.stringify(item),
             headers: { "Content-Type": "application/json"}
@@ -78,7 +78,7 @@ const InventoryApi = {
     },
 
     delete: (id) => {
-        fetch(URI + "/inventory/" + id, {
+        fetch(URI + "/item/"+ id , {
             method: "DELETE"
         })
         .then(result => result.json())
