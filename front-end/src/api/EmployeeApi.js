@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 // const BASE = "http://localhost:8080"  // use this if running locally
 const BASE = "http://localhost:8080" // edit this with your AWS endpoint
@@ -35,7 +35,6 @@ const EmployeeApi = {
                 if(typeof data.id !== 'undefined') {
                     setUser(data)
                     console.log(data)
-                    alert('Data id NOT undefined')
                 } else {
                     alert("Username not found!")
                 }

@@ -69,6 +69,7 @@ const InventoryApi = {
                     newList.splice(index,1,data)
 
                     setInventoryList(newList)
+                    alert("ITEM Updated!")
             }else{
                 alert("Error updating item")
             }

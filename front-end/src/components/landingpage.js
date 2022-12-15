@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../css/landingpage.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import EmployeeApi from '../api/EmployeeApi';
 import { useNavigate } from "react-router-dom";
-import SignedInPage from './signedInPage';
 
 const LandingPage = () => {
     const navigate = useNavigate();
@@ -22,18 +21,13 @@ const LandingPage = () => {
         });
 
 const handleSubmit = (event) => {
-    // can't do getUserById b/c we don't know id yet
+    
     console.log(user)
-    EmployeeApi.getUserByUsername(user, setUser)
+    EmployeeApi.getUserByUsername(user, setUser).finally(() => {
+        navigate("/logged_in")
+      })
 
-    // given user info in user var
-    // if user.password == password, then good to go (idk if encoded or decoded  *NEED TO TEST*)
-    if( typeof user.id !== 'undefined' ) {
-        alert('SUCCESS!')
-        navigate('/logged_in/*')
-    } 
-
-    event.preventDefault()
+    //event.preventDefault()
 }
 
 const handleChange = (event) => {
@@ -44,24 +38,11 @@ const handleChange = (event) => {
 }
 
     return(
-<<<<<<< HEAD
-        
-            <div className="container">
-                <p className="welcome">Fancy Inventory Orderer</p>
-                <img src="https://www.hanaretail.com/wp-content/uploads/2022/03/2-2.png" alt="loginPic"/>
-                <div className="loginContainer">
-                    <br></br>
-                    <input type="text" className="form__field" placeholder="Username" name="Username" id='Username' required />
-                    
-                    <br></br>
-                    <input type="password" className="form__field" placeholder="Password" name="Password" id='Password' required />
-=======
             <div className="container">
                 <p className="welcome">Fancy Inventory Orderer</p>
                 <img src="https://www.hanaretail.com/wp-content/uploads/2022/03/2-2.png" alt="loginPic"/>
                     <div className="loginContainer">
                         <form onSubmit={ handleSubmit } >
->>>>>>> vincent-front-end
 
                             <br></br>
                             <input type="text" class="form__field" placeholder="Username" name="username" id='Username' value={user.username} onChange={ handleChange } required />
@@ -84,10 +65,6 @@ const handleChange = (event) => {
                             </a>
                         </div>
             </div>
-<<<<<<< HEAD
-        
-=======
->>>>>>> vincent-front-end
     )
 }
 

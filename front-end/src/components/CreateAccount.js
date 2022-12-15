@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import EmployeeApi from '../api/EmployeeApi';
 import '../css/createAccount.css';
+import { Link } from 'react-router-dom';
 
 const CreateAccount = () => {
 
@@ -64,6 +65,10 @@ const CreateAccount = () => {
                     </button> 
                     
                 </form>  
+
+                <button>
+                    <Link className="nav-link" to='/'>Home</Link>
+                </button>
             </div>
         );
     
