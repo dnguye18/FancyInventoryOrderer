@@ -9,12 +9,14 @@ const EmployeeDelete = () => {
     const[employeeList, setEmployeeList] = useState([])
     
 
+    // Retrieves all employees in EmployeeList
     useEffect( () => {
         console.log("Hello, this component was mounted!")
         EmployeeApi.getAll(setEmployeeList)
 
     }, [] )
 
+    // Sets the id to what user has inputted
     const handleChange = (event) => {
         setId({
             ...id,
@@ -22,7 +24,7 @@ const EmployeeDelete = () => {
         })
     }
 
-
+    // Deletes the Employee by their Id
     const handleSubmit = (event) => {
 
         EmployeeApi.delete(document.getElementById("id").value)

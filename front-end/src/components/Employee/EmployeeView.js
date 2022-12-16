@@ -8,6 +8,8 @@ const EmployeeView = () => {
 
     const[employeeList, setEmployeeList] = useState([])
     
+
+    // Gets all Employees in EmployeeList
     useEffect( () => {
         console.log("Hello, this component was mounted!")
         EmployeeApi.getAll(setEmployeeList)

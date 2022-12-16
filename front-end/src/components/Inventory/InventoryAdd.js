@@ -9,6 +9,8 @@ const InventoryAdd = () => {
     const[ price, setPrice ] = useState(0)
     const[ qty, setQty ] = useState(0)
 
+
+    // Adds item by what the user has inputted
     const handleSubmit = (event) => { 
 
         const item = {

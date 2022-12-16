@@ -5,17 +5,19 @@ import EmployeeApi from '../api/EmployeeApi';
 import {  useNavigate } from "react-router-dom";
 
 const LandingPage = (props) => {
-    const navigate = useNavigate()
 
+    const navigate = useNavigate()
     const[employeeList, setEmployeeList] = useState([])
     const[jwt, setJwt] = useState("");
     const[user, setUser] = useState({})
 
+    {/* Used to retrieve all Employees*/}
     useEffect( () => {
         console.log("Hello, this component was mounted!")
         EmployeeApi.getAll(setEmployeeList)
     }, [] )
 
+{/* Checks to see if user has put in correct username and password*/ }
 async function authenticateLogin() {
     await fetch("http://localhost:8080/authenticate", {
         method: "POST",
@@ -36,6 +38,7 @@ async function authenticateLogin() {
         .catch( error => console.log(error) ) 
 }
 
+{/* Handles  when clicking on login. Checks if user and password is in database and pushes user to /logged_in */ }
 const handleSubmit = (event) => {
     event.preventDefault()
 
@@ -55,8 +58,7 @@ const handleSubmit = (event) => {
     })
 }
 
-
-
+{/* Sets the user to whatever they put in */}
 const handleChange = (event) => {
     setUser({
         ...user,

@@ -15,6 +15,7 @@ import EmployeeDelete from './components/Employee/EmployeeDelete';
 function App() {
   return (
     <div className="Appcontainer">
+      {/* Routes that lead to different pages*/}
       <Routes>
         <Route path='/' element={<LandingPage />} exact/>
         <Route path="/create_profile" element={<CreateAccount />} />

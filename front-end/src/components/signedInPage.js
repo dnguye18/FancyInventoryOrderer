@@ -4,6 +4,7 @@ import Header from './Header';
 const signedInPage = () => {
     return(
         <div>
+            {/* Gets the Header */}
             <Header/>
         </div>
     )

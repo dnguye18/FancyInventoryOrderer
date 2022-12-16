@@ -4,12 +4,21 @@ import Header from '../Header';
 
 const InventoryView = () => {
 
+    // Check to see if Inventory retrieved all items
     const[inventoryList, setInventoryList] = useState([])
     useEffect( () => {
         console.log("Hello, this component was mounted!")
         InventoryApi.getAll(setInventoryList)
        
     }, [] )
+
+    // Sort by Qty
+    /* const[qty, setQty] = useState(0);
+    const handleSubmit = (event) => {
+        InventoryApi.getAll(setInventoryList)
+            
+
+    }*/
 
     return(
         <div>

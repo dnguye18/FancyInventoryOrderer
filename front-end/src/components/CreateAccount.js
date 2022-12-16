@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 const CreateAccount = () => {
 
+        // sets user to their id, username, first_name, etc.
         const[user, setUser] =
         useState({
             id: 0,
@@ -21,7 +22,7 @@ const CreateAccount = () => {
        
 
 
-
+    // On clicking create account adds the user inputed text field into database
     const handleSubmit = (event) => {
 
         EmployeeApi.add(user)
@@ -30,6 +31,8 @@ const CreateAccount = () => {
         event.preventDefault()
     }
 
+
+    // Changes the user's name to whatever they put in the textfield
     const handleChange = (event) => {
         setUser({
             ...user,

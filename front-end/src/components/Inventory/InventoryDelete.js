@@ -9,12 +9,15 @@ const InventoryDelete = () => {
 
     const [ id, setId ] = useState(0)
     const[inventoryList, setInventoryList] = useState([])
+
+    // Gets all of the items in the Inventory List
     useEffect( () => {
         console.log("Hello, this component was mounted!")
         InventoryApi.getAll(setInventoryList)
        
     }, [] )
 
+    // Sets the id to what user inputted
     const handleChange = (event) => {
         setId({
             ...id,
@@ -22,6 +25,7 @@ const InventoryDelete = () => {
         })
     }
 
+    // Once click sumbit deletes the item.id by what the user inputted
     const handleSubmit = (event) => {
 
         InventoryApi.delete(document.getElementById("id").value)

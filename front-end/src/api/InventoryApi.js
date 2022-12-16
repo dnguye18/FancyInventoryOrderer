@@ -12,6 +12,7 @@ const InventoryApi = {
             .catch(error => {console.log(error)})
     },
 
+
     add: (item,setId) =>{
         fetch(URI + "/item",{
             method: "POST",

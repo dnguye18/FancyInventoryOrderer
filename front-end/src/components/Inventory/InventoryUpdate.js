@@ -12,6 +12,8 @@ const InventoryUpdate = () => {
     const[ qty, setQty ] = useState(0)
     const[ inventoryList, setInventoryList] = useState([])
 
+
+    // Checks the item's id, name price and quantity
     const handleSubmit = (event) => { 
 
         const item = {
@@ -29,6 +31,8 @@ const InventoryUpdate = () => {
         event.preventDefault()
     }
     
+
+    // Gets all of the inventory items from InventoryList
     useEffect( () => {
         console.log("Hello, this component was mounted!")
         InventoryApi.getAll(setInventoryList)
