@@ -25,6 +25,9 @@ const InventoryDelete = () => {
     const handleSubmit = (event) => {
 
         InventoryApi.delete(document.getElementById("id").value)
+        if( typeof document.getElementById("id").value !== 'undefined' ) {
+            alert('ITEM Deleted!')
+        } 
 
 
         event.preventDefault()

@@ -6,21 +6,34 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const InventoryUpdate = () => {
 
-    const[item, setItem] =
-    useState({
-        id: 0,
-        name: "",
-        price: "",
-        qty: "",
-    });
+    const [ id, setId ] = useState(0)
+    const[ name, setName ] = useState("")
+    const[ price, setPrice ] = useState(0)
+    const[ qty, setQty ] = useState(0)
+    const[ inventoryList, setInventoryList] = useState([])
 
-    const[inventoryList, setInventoryList] = useState([])
+    const handleSubmit = (event) => { 
+
+        const item = {
+            "id" : id,
+            "name": name,
+            "price": price,
+            "qty": qty
+        }
+
+        // make a POST request here to create the product
+        InventoryApi.update(item, inventoryList, setInventoryList)
+
+
+        // stop the page from refreshing/reloading when submitting the form
+        event.preventDefault()
+    }
+    
     useEffect( () => {
         console.log("Hello, this component was mounted!")
         InventoryApi.getAll(setInventoryList)
        
     }, [] )
-
 
 
     return(
@@ -49,6 +62,77 @@ const InventoryUpdate = () => {
                     }
                 </tbody>
             </table>
+            
+
+            <form onSubmit={ handleSubmit }>
+            <div className='mb-3'>
+                    <label htmlFor='prod-id' className='form-label' >
+                        ID
+                    </label>
+                    <input type="number"
+                           className='form-control'
+                           id='prod-id'
+                           required
+                           min="1"
+                           step="1"
+                           name="prod-id"
+                           value={id}
+                           onChange={ (event) => setId(event.target.value) } 
+                           />
+                </div>
+
+                <div className='mb-3'>
+                    <label htmlFor='prod-name' className='form-label' >
+                        Item Name
+                    </label>
+                    <input type="text"
+                           className='form-control'
+                           id='prod-name'
+                           required
+                           name="prod-name"
+                           value={name}
+                           onChange={ (event) => { setName(event.target.value) } }
+                        />
+                </div>
+
+                <div className='mb-3'>
+                    <label htmlFor='prod-price' className='form-label' >
+                        Price
+                    </label>
+                    <input type="number"
+                           className='form-control'
+                           id='prod-price'
+                           required
+                           min="0"
+                           step="0.01" 
+                           name="prod-price"
+                           value={price}
+                           onChange={ (event) => { setPrice(event.target.value) } }
+                           />
+                </div>
+
+                <div className='mb-3'>
+                    
+                    <label htmlFor='prod-qty' className='form-label' >
+                        Quantity
+                    </label>
+                    <input type="number"
+                           className='form-control'
+                           id='prod-qty'
+                           required
+                           min="1"
+                           step="1"
+                           name="prod-qty"
+                           value={qty}
+                           onChange={ (event) => setQty(event.target.value) } 
+                           />
+                </div>
+
+                <button type="submit" className="btn btn-primary">
+                    Update
+                </button>
+            </form>
+
         </div>
     )
 }

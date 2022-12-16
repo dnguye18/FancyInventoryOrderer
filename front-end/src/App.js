@@ -3,6 +3,7 @@ import './App.css';
 import CreateAccount from './components/CreateAccount';
 import LandingPage from './components/landingpage';
 import SignedInPage from './components/signedInPage';
+
 import InventoryView from './components/Inventory/InventoryView';
 import InventoryAdd from './components/Inventory/InventoryAdd';
 import InventoryUpdate from './components/Inventory/InventoryUpdate';
@@ -10,7 +11,6 @@ import InventoryDelete from './components/Inventory/InventoryDelete';
 
 import EmployeeView from './components/Employee/EmployeeView';
 import EmployeeDelete from './components/Employee/EmployeeDelete';
-import EmployeeUpdate from './components/Employee/EmployeeUpdate';
 
 function App() {
   return (
@@ -27,7 +27,6 @@ function App() {
 
         <Route path='/employee/view' element={<EmployeeView />} />
         <Route path='/employee/delete' element={<EmployeeDelete />} />
-        <Route path='/employee/update' element={<EmployeeUpdate />} />
       </Routes>
     </div>
   );
