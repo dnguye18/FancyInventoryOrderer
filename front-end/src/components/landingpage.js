@@ -4,32 +4,55 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import EmployeeApi from '../api/EmployeeApi';
 import {  useNavigate } from "react-router-dom";
 
-const LandingPage = () => {
+const LandingPage = (props) => {
     const navigate = useNavigate()
 
     const[employeeList, setEmployeeList] = useState([])
+    const[jwt, setJwt] = useState("");
+    const[user, setUser] = useState({})
+
     useEffect( () => {
         console.log("Hello, this component was mounted!")
         EmployeeApi.getAll(setEmployeeList)
     }, [] )
 
-    const[user, setUser] =
-        useState({});
+async function authenticateLogin() {
+    await fetch("http://localhost:8080/authenticate", {
+        method: "POST",
+        body: JSON.stringify({
+            username: user.username,
+            password: user.password
+        }),
+        headers: { "Content-Type": "application/json" }
+    })
+        .then( async response => {
+            return await response.json()
 
-    const[jwt, setJwt] = useState("Bearer ")
-    
-    const[data, setData] = useState({})
+        })
+        .then( async data => {
+            setJwt("Bearer " + await data.jwt);
+        })
+
+        .catch( error => console.log(error) ) 
+}
 
 const handleSubmit = (event) => {
     event.preventDefault()
 
     employeeList.forEach( (e) => {
         if (e.username == user.username) {
-            navigate('/logged_in/')
+            //while(jwt == 'Bearer ') {
+                //console.log("LOOPING")
+                authenticateLogin();
+            //}
+            if( jwt !== ""  && jwt !== "Bearer undefined") {
+                navigate("/logged_in")
+            }
+
+            console.log("JWT STATE")
+            console.log(jwt)
         }
     })
-
-    //EmployeeApi.authenticate(user, jwt, setJwt)
 }
 
 
