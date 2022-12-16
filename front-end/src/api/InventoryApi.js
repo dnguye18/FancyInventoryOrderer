@@ -28,10 +28,9 @@ const InventoryApi = {
                     alert(`ITEM CREATED \n` +
                     `------------------------\n` + 
                     `ID: ${data.id}\n` +
-                    `Order: ${data.order}` +
-                    `Item Name: ${data.name}` +
-                    `Price: ${data.price}` +
-                    `Quantity: ${data.qty}`
+                    `Item Name: ${data.name}\n` +
+                    `Price: ${data.price}\n` +
+                    `Quantity: ${data.qty}\n`
                     )
                 }
                 else{

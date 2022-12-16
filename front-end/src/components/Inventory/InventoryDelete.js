@@ -70,4 +70,4 @@ const InventoryDelete = () => {
     )
 }
 
-export default InventoryDelete
+export default InventoryDelete;
