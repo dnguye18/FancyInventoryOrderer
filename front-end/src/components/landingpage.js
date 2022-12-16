@@ -1,34 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import '../css/landingpage.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import EmployeeApi from '../api/EmployeeApi';
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
+
+    const[employeeList, setEmployeeList] = useState([])
+    useEffect( () => {
+        console.log("Hello, this component was mounted!")
+        EmployeeApi.getAll(setEmployeeList)
+    }, [] )
 
     const[user, setUser] =
-        useState({
-            id: null,
-            username: "",
-            first_name: "",
-            last_name: "",
-            phone: "",
-            password: "",
-            role: "ROLE_USER",
-            items: [],
-            enabled: true
-        });
+        useState({});
+
+    const[jwt, setJwt] = useState("Bearer ")
+    
+    const[data, setData] = useState({})
 
 const handleSubmit = (event) => {
-    
-    console.log(user)
-    EmployeeApi.getUserByUsername(user, setUser).finally(() => {
-        navigate("/logged_in")
-      })
+    event.preventDefault()
 
-    //event.preventDefault()
+    employeeList.forEach( (e) => {
+        if (e.username == user.username) {
+            navigate('/logged_in/')
+        }
+    })
+
+    //EmployeeApi.authenticate(user, jwt, setJwt)
 }
+
+
 
 const handleChange = (event) => {
     setUser({
@@ -45,10 +49,10 @@ const handleChange = (event) => {
                         <form onSubmit={ handleSubmit } >
 
                             <br></br>
-                            <input type="text" className="form__field" placeholder="Username" name="username" id='Username' value={user.username} onChange={ handleChange } required />
+                            <input type="text" class="form__field" placeholder="Username" name="username" id='username' value={user.username}onChange={ handleChange } required />
                             
                             <br></br>
-                            <input type="password" className="form__field" placeholder="Password" name="password" id='Password' value={user.password} onChange={ handleChange } required />
+                            <input type="password" class="form__field" placeholder="Password" name="password" id='password' value={user.password} onChange={ handleChange } required />
 
                             <p></p>
 

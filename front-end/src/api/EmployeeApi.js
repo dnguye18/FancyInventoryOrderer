@@ -1,12 +1,11 @@
-import { Navigate, useNavigate } from "react-router-dom";
-
 // const BASE = "http://localhost:8080"  // use this if running locally
 const BASE = "http://localhost:8080" // edit this with your AWS endpoint
 const URI = BASE + "/api"
 
-const EmployeeApi = {  
-
+const EmployeeApi = {
+    
     getAll: (setUserList) => {
+
         fetch(URI + "/user")
             .then( result => result.json() )
             .then( data => {
@@ -20,25 +19,61 @@ const EmployeeApi = {
             .then(result => result.json())
             .then(data => {
                 if(typeof data.username !== 'undefined') {
-                    setUser(data)
+                    setUser({
+                        id: data.id,
+                        username: data.username,
+                        first_name: data.first_name,
+                        last_name: data.last_name,
+                        phone: data.phone,
+                        password: data.password,
+                        role: "ROLE_USER",
+                        items: data.items,
+                        enabled: true
+                    })
                 } else {
-                    alert('User with id = ' + id + ' not found!')
+                    alert("Username already exists!")
                 }
             })
+            .catch( error=> { console.log(error)})
     },
 
     getUserByUsername: (user, setUser) => {
-        console.log(URI + "/user/username/" + user.username)
         fetch(URI + "/user/username/" + user.username)
             .then(result => result.json())
             .then(data => {
+                console.log("DATA")
+                console.log(data)
                 if(typeof data.id !== 'undefined') {
                     setUser(data)
-                    console.log(data)
+                    //alert('SUCCESS!')
+                    console.log("got here")
                 } else {
-                    alert("Username not found!")
+                    alert("Username already exists!")
                 }
             })
+            .catch( error => {
+                console.log(error)
+            });
+    },
+
+    authenticate: (user, jwt, setJwt) => {
+        fetch(BASE + "/authenticate", {
+            method: "POST",
+            body: JSON.stringify({
+                username: user.username,
+                password: user.password
+            }),
+            headers: { "Content-Type": "application/json" }
+        })
+            .then( response => {
+                return response.json()
+            })
+            .then( data => {
+                setJwt(...jwt, data.jwt)
+                console.log(data)
+            })
+
+            .catch( error => console.log(error) ) 
     },
 
     add: (user) => {
